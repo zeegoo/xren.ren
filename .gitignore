@@ -1,0 +1,34 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node / VitePress
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.vitepress/cache/
+.vitepress/dist/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 临时文件
+*.tmp
+*.bak
+
+# 空目录
+1/
+oh-ai/

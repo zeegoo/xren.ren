@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6B46C1"/>
+      <stop offset="100%" style="stop-color:#319795"/>
+    </linearGradient>
+  </defs>
+  <!-- 芯片方框 -->
+  <rect x="12" y="12" width="40" height="40" rx="6" fill="none" stroke="url(#g1)" stroke-width="3"/>
+  <!-- 内部太极/玄 -->
+  <text x="32" y="38" text-anchor="middle" font-size="20" fill="url(#g1)" font-family="serif" font-weight="bold">玄</text>
+  <!-- 芯片引脚 -->
+  <line x1="12" y1="20" x2="4" y2="20" stroke="#319795" stroke-width="2" stroke-linecap="round"/>
+  <line x1="12" y1="32" x2="4" y2="32" stroke="#319795" stroke-width="2" stroke-linecap="round"/>
+  <line x1="12" y1="44" x2="4" y2="44" stroke="#319795" stroke-width="2" stroke-linecap="round"/>
+  <line x1="52" y1="20" x2="60" y2="20" stroke="#319795" stroke-width="2" stroke-linecap="round"/>
+  <line x1="52" y1="32" x2="60" y2="32" stroke="#319795" stroke-width="2" stroke-linecap="round"/>
+  <line x1="52" y1="44" x2="60" y2="44" stroke="#319795" stroke-width="2" stroke-linecap="round"/>
+  <line x1="20" y1="12" x2="20" y2="4" stroke="#319795" stroke-width="2" stroke-linecap="round"/>
+  <line x1="32" y1="12" x2="32" y2="4" stroke="#319795" stroke-width="2" stroke-linecap="round"/>
+  <line x1="44" y1="12" x2="44" y2="4" stroke="#319795" stroke-width="2" stroke-linecap="round"/>
+  <line x1="20" y1="52" x2="20" y2="60" stroke="#319795" stroke-width="2" stroke-linecap="round"/>
+  <line x1="32" y1="52" x2="32" y2="60" stroke="#319795" stroke-width="2" stroke-linecap="round"/>
+  <line x1="44" y1="52" x2="44" y2="60" stroke="#319795" stroke-width="2" stroke-linecap="round"/>
+</svg>
