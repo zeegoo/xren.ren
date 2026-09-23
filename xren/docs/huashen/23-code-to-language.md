@@ -23,7 +23,7 @@
 
 化神期最爽的一刻，就是你亲手写出一个能跑 `2 + 3 * 4` 的小程序。那一刻你不再是某个语言的**使用者**，你是这门迷你语言的**造物主**——天道法则由你书写，灵气流转由你定义。
 
-今天这篇，就带你从零写一个能算加减乘除、带变量的解释器。**写完之后，你就跨过了"程序使用者"到"语言创造者"的那道天堑。**
+今天这篇，就带你从零写一个能算加减乘除、带变量的解释器。写完之后，你就跨过了"程序使用者"到"语言创造者"的那道天堑。
 
 ---
 
@@ -38,7 +38,7 @@
 你写 `print("hello")`，看起来 Python 在"运行代码"，其实它干的是：
 
 ```
-"print(\"hello\")"  →  [拆词]  →  [理解语法]  →  [执行动作]
+"print(\"hello\")" → [拆词] → [理解语法] → [执行动作]
 ```
 
 三个步骤，对应三个组件：
@@ -53,17 +53,17 @@
 
 ```mermaid
 flowchart LR
-    A[源代码<br/>2 + 3 * 4] -->|Lexer<br/>灵气拆解| B[Token序列<br/>NUM PLUS NUM TIMES NUM]
-    B -->|Parser<br/>经脉推演| C[AST语法树<br/>+ 2 × 3 4]
-    C -->|Evaluator<br/>法则运转| D[运算结果<br/>14]
-    E[REPL<br/>交互界面] -.读取.-> A
-    E -.打印.-> D
+ A[源代码<br/>2 + 3 * 4] -->|Lexer<br/>灵气拆解| B[Token序列<br/>NUM PLUS NUM TIMES NUM]
+ B -->|Parser<br/>经脉推演| C[AST语法树<br/>+ 2 × 3 4]
+ C -->|Evaluator<br/>法则运转| D[运算结果<br/>14]
+ E[REPL<br/>交互界面] -.读取.-> A
+ E -.打印.-> D
 
-    style A fill:#1a1a2e,color:#fff
-    style B fill:#533483,color:#fff
-    style C fill:#e94560,color:#fff
-    style D fill:#0f3460,color:#e94560
-    style E fill:#16213e,color:#e94560
+ style A fill:#1a1a2e,color:#fff
+ style B fill:#533483,color:#fff
+ style C fill:#e94560,color:#fff
+ style D fill:#0f3460,color:#e94560
+ style E fill:#16213e,color:#e94560
 ```
 
 **这就是解释器的全部秘密。** 任何语言——Python、JavaScript、Lua——核心都是这四件套，只是细节繁复程度天差地别。今天我们造个迷你版，把这四件套全部跑通。
@@ -76,39 +76,39 @@ flowchart LR
 
 ```mermaid
 graph TD
-    subgraph 用户层
-        REPL[REPL交互层<br/>读输入 → 求值 → 打印]
-    end
+ subgraph 用户层
+ REPL[REPL交互层<br/>读输入 → 求值 → 打印]
+ end
 
-    subgraph 编译期
-        LEX[Lexer词法分析<br/>字符串 → Token流]
-        PARSE[Parser语法分析<br/>Token流 → AST]
-    end
+ subgraph 编译期
+ LEX[Lexer词法分析<br/>字符串 → Token流]
+ PARSE[Parser语法分析<br/>Token流 → AST]
+ end
 
-    subgraph 运行期
-        EVAL[Evaluator求值器<br/>AST → 结果]
-        ENV[Environment环境<br/>变量存储]
-    end
+ subgraph 运行期
+ EVAL[Evaluator求值器<br/>AST → 结果]
+ ENV[Environment环境<br/>变量存储]
+ end
 
-    REPL --> LEX
-    LEX --> PARSE
-    PARSE --> EVAL
-    EVAL --> ENV
-    ENV --> EVAL
+ REPL --> LEX
+ LEX --> PARSE
+ PARSE --> EVAL
+ EVAL --> ENV
+ ENV --> EVAL
 
-    style REPL fill:#0f3460,color:#fff
-    style LEX fill:#533483,color:#fff
-    style PARSE fill:#e94560,color:#fff
-    style EVAL fill:#16213e,color:#e94560
-    style ENV fill:#1a1a2e,color:#fff
+ style REPL fill:#0f3460,color:#fff
+ style LEX fill:#533483,color:#fff
+ style PARSE fill:#e94560,color:#fff
+ style EVAL fill:#16213e,color:#e94560
+ style ENV fill:#1a1a2e,color:#fff
 ```
 
 注意几个关键点：
 
-- **Lexer 和 Parser 是编译期**（输入是死的字符串，输出是死的树）
-- **Evaluator 和 Environment 是运行期**（树在这里被"激活"，灵气真正流转）
+- Lexer 和 Parser 是编译期（输入是死的字符串，输出是死的树）
+- Evaluator 和 Environment 是运行期（树在这里被"激活"，灵气真正流转）
 - **Environment（环境）** 是保存变量的地方，类似一个字典 `{"x": 10}`
-- **REPL** 把四层粘在一起，给用户即时反馈
+- REPL 把四层粘在一起，给用户即时反馈
 
 接下来我们就一层一层造。
 
@@ -116,7 +116,7 @@ graph TD
 
 ### 化神第三劫：动手实现——30 行搞定 Lexer
 
-Lexer 的活儿最简单：**把字符串切成 token**。token 是语言的"原子"，有类型（数字、运算符、变量名）和值。
+Lexer 的活儿最简单：把字符串切成 token。token 是语言的"原子"，有类型（数字、运算符、变量名）和值。
 
 ```python
 # === Lexer：把字符串切成 token（灵气拆解） ===
@@ -160,24 +160,24 @@ print(lex("x = 2 + 3 * 4"))
 
 注意两个细节：
 
-1. **正则匹配从前往后扫**，每次只切头部一段（`re.match` 默认锚定开头）
-2. **空格被 SKIP 跳过**，不参与后续分析——这就是为什么语言设计者要先想清楚"哪些字符有意义"
+1. 正则匹配从前往后扫，每次只切头部一段（`re.match` 默认锚定开头）
+2. 空格被 SKIP 跳过，不参与后续分析——这就是为什么语言设计者要先想清楚"哪些字符有意义"
 
-20 行不到，Lexer 就完了。**是不是觉得"造语言"没那么玄乎？** 化神大能的秘密，就是把大东西拆成小零件。
+20 行不到，Lexer 就完了。是不是觉得"造语言"没那么玄乎？ 化神大能的秘密，就是把大东西拆成小零件。
 
 ---
 
 ### 化神第四劫：Parser——把 Token 拼成树
 
-Parser 才是核心难点。它的活儿是：**识别 token 之间的层级关系，输出 AST（抽象语法树）。**
+Parser 才是核心难点。它的活儿是：识别 token 之间的层级关系，输出 AST（抽象语法树）。
 
 为什么叫"树"？因为 `2 + 3 * 4` 里有优先级——`*` 比 `+` 先算，所以结构是：
 ```
-    +
-   / \
-  2   *
-     / \
-    3   4
+ +
+ / \
+ 2 *
+ / \
+ 3 4
 ```
 
 写成代码就是嵌套的 Python 对象：
@@ -272,7 +272,7 @@ class Parser:
 
 关键技巧叫**递归下降**——每个语法规则对应一个函数，函数互相调用。`parse_expr` 调用 `parse_term`，`parse_term` 调用 `parse_factor`，层层往下"下降"。
 
-**优先级就藏在调用顺序里**：`parse_expr` 先吃加减，调用 `parse_term` 时就把乘除处理完了才返回——这天然保证了 `*` 比 `+` 先算。
+优先级就藏在调用顺序里：`parse_expr` 先吃加减，调用 `parse_term` 时就把乘除处理完了才返回——这天然保证了 `*` 比 `+` 先算。
 
 ---
 
@@ -315,13 +315,13 @@ class Evaluator:
 
 看到没？`BinOp` 的求值是**后序遍历**：先求左子树，再求右子树，最后算自己。这天然符合"先算操作数再算运算符"的语义。
 
-`self.env` 这个字典就是**Environment（环境）**——所有变量都住在这里。`x = 10` 就是 `env['x'] = 10`，`y = x + 1` 就是 `env['y'] = env['x'] + 1`——简单得像查字典。
+`self.env` 这个字典就是Environment（环境）——所有变量都住在这里。`x = 10` 就是 `env['x'] = 10`，`y = x + 1` 就是 `env['y'] = env['x'] + 1`——简单得像查字典。
 
 ---
 
 ### 化神第六劫：REPL——把四件套串起来
 
-REPL 是 **R**ead-**E**val-**P**rint **L**oop 的缩写：读输入、求值、打印、循环。Python 自带 IDLE、Node 自带 REPL，都是这个套路。
+REPL 是 Read-Eval-Print Loop 的缩写：读输入、求值、打印、循环。Python 自带 IDLE、Node 自带 REPL，都是这个套路。
 
 ```python
 # === REPL：把四件套拼成完整的语言运行环境 ===
@@ -360,7 +360,7 @@ if __name__ == "__main__":
 >>> exit
 ```
 
-**恭喜，你刚造了一门语言。** 它能算加减乘除、能赋值、能查变量——麻雀虽小，五脏俱全：Lexer / Parser / Evaluator / Environment / REPL，一个不缺。
+恭喜，你刚造了一门语言。 它能算加减乘除、能赋值、能查变量——麻雀虽小，五脏俱全：Lexer / Parser / Evaluator / Environment / REPL，一个不缺。
 
 ---
 
@@ -378,23 +378,23 @@ if __name__ == "__main__":
 | 性能 | 解释执行，每次重算 | 字节码 + 虚拟机（CPython 路线） | ⭐⭐⭐⭐⭐ |
 | 优化 | 零优化 | JIT、内联、常量折叠... | ⭐⭐⭐⭐⭐ |
 
-但路径是清晰的：**从能跑 → 能用 → 能扩展 → 能优化，每一步都有人趟过。** 你今天写的 100 行 Mini-Lang，是 LLVM、V8、CPython 这些庞然大物的种子——它们也是从 `2 + 3` 起步的。
+但路径是清晰的：从能跑 → 能用 → 能扩展 → 能优化，每一步都有人趟过。 你今天写的 100 行 Mini-Lang，是 LLVM、V8、CPython 这些庞然大物的种子——它们也是从 `2 + 3` 起步的。
 
 真正的工程语言会进一步拆成更多层：
 
 ```mermaid
 flowchart LR
-    A[源代码] --> B[Lexer]
-    B --> C[Parser]
-    C --> D[AST]
-    D --> E[字节码生成]
-    E --> F[虚拟机执行]
-    F --> G[运行时<br/>GC+对象系统]
+ A[源代码] --> B[Lexer]
+ B --> C[Parser]
+ C --> D[AST]
+ D --> E[字节码生成]
+ E --> F[虚拟机执行]
+ F --> G[运行时<br/>GC+对象系统]
 
-    style A fill:#1a1a2e,color:#fff
-    style D fill:#e94560,color:#fff
-    style F fill:#0f3460,color:#e94560
-    style G fill:#16213e,color:#fff
+ style A fill:#1a1a2e,color:#fff
+ style D fill:#e94560,color:#fff
+ style F fill:#0f3460,color:#e94560
+ style G fill:#16213e,color:#fff
 ```
 
 我们今天的 Mini-Lang 跳过了字节码和虚拟机，直接 AST 解释执行——这是最简单的路线，但也是最慢的路线。CPython 走的是字节码路线，V8 还更进一步做了 JIT 编译——这都是后话了。
@@ -405,9 +405,9 @@ flowchart LR
 
 最后讲讲心法。
 
-修仙小说里，化神大能最显著的特征是：**能自己创造功法**。不是只会照着用前辈的功法，是能根据自己对天道的理解，写出新的功法体系。Linus 写出 Git、Kotlin 团队造出新的 JVM 语言、Guido 设计 Python——他们都是化神大能。
+修仙小说里，化神大能最显著的特征是：能自己创造功法。不是只会照着用前辈的功法，是能根据自己对天道的理解，写出新的功法体系。Linus 写出 Git、Kotlin 团队造出新的 JVM 语言、Guido 设计 Python——他们都是化神大能。
 
-而我们今天做的事，本质上和 Guido 设计 Python 的第一步一模一样：**定义语法规则、写出 Lexer/Parser、跑通 REPL。** 差别只是规模：他后来加了几万行和二十年的工程，我们只加了 100 行。但**从"使用者"到"创造者"那道心理天堑，今天就跨过去了**。
+而我们今天做的事，本质上和 Guido 设计 Python 的第一步一模一样：定义语法规则、写出 Lexer/Parser、跑通 REPL。 差别只是规模：他后来加了几万行和二十年的工程，我们只加了 100 行。但从"使用者"到"创造者"那道心理天堑，今天就跨过去了。
 
 化神期和元婴期的本质区别：
 
@@ -418,9 +418,9 @@ flowchart LR
 | 标志能力 | 看穿 CPU/操作系统如何工作 | 能重新定义"如何工作" |
 | 化神天劫 | — | 跨过"我能不能造语言"的执念 |
 
-你今天不一定要去造个新语言商用，但**你有了"语言不是神圣不可侵犯的，语言只是程序"的认知**——这是化神期最核心的灵觉觉醒。
+你今天不一定要去造个新语言商用，但你有了"语言不是神圣不可侵犯的，语言只是程序"的认知——这是化神期最核心的灵觉觉醒。
 
-知道语言可以被拆解、被重写、被替换——从此以后，无论你用什么语言，都是**平视**它，而不是仰视。仰视语言的人是使用者，平视语言的人是创造者。
+知道语言可以被拆解、被重写、被替换——从此以后，无论你用什么语言，都是平视它，而不是仰视。仰视语言的人是使用者，平视语言的人是创造者。
 
 ---
 
@@ -445,34 +445,34 @@ flowchart LR
 
 ## 突破条件
 
-要真正从"写过 Mini-Lang"跨到"具备化神期造语言能力"，你需要：
+要真正从"写过 Mini-Lang"跨到"具备化神期造语言能力，你需要：
 
 - [ ] 完整抄一遍上面的代码，亲手跑通 `2 + 3 * 4` 输出 `14`
-- [ ] 给 Mini-Lang 加**浮点数支持**（提示：改 `Num` 类的构造，改正则 `\d+` 为支持小数点）
-- [ ] 给 Mini-Lang 加**if/else 控制流**（提示：加 `IF/THEN/ELSE` token，加 `If` AST 节点，Evaluator 处理布尔条件）
-- [ ] 给 Mini-Lang 加**函数定义**（提示：`def name(params) = expr`，Evaluator 维护闭包）
+- [ ] 给 Mini-Lang 加浮点数支持（提示：改 `Num` 类的构造，改正则 `\d+` 为支持小数点）
+- [ ] 给 Mini-Lang 加if/else 控制流（提示：加 `IF/THEN/ELSE` token，加 `If` AST 节点，Evaluator 处理布尔条件）
+- [ ] 给 Mini-Lang 加函数定义（提示：`def name(params) = expr`，Evaluator 维护闭包）
 - [ ] 读一遍《Writing An Interpreter In Go》（Thorsten Ball），看专业实现长什么样
-- [ ] 思考：如果让你**重新设计**一遍 Mini-Lang 的语法，你会怎么改？为什么？
+- [ ] 思考：如果让你重新设计一遍 Mini-Lang 的语法，你会怎么改？为什么？
 
-> 最后一条是化神心法。当你开始问"如果是我来设计，我会怎么做"——你就真正进入了化神期。**不再追问"语言该怎么用"，而是追问"语言该怎么设计"。**
+> 最后一条是化神心法。当你开始问"如果是我来设计，我会怎么做"——你就真正进入了化神期。不再追问"语言该怎么用"，而是追问"语言该怎么设计"。
 
-六条做完，你就能叩开**渡劫期**的大门。渡劫期要解决的是：你创造的东西如何影响整个行业——Linus 的 Git、Guido 的 Python、Brendan Eich 的 JavaScript，都是渡劫级的工作。下次第 24 篇《操作系统是怎么炼成的》会从另一个视角讲化神期的"创造"。
+六条做完，你就能叩开渡劫期的大门。渡劫期要解决的是：你创造的东西如何影响整个行业——Linus 的 Git、Guido 的 Python、Brendan Eich 的 JavaScript，都是渡劫级的工作。下次第 24 篇《操作系统是怎么炼成的》会从另一个视角讲化神期的"创造"。
 
 ---
 
 ## 下期预告 + 互动
 
-> **下一篇：【化神·24】操作系统是怎么炼成的**
+> 下一篇：【化神·24】操作系统是怎么炼成的
 >
-> 你写过 Linux 驱动、调过内核参数，但你从未**造过**一个操作系统。
+> 你写过 Linux 驱动、调过内核参数，但你从未造过一个操作系统。
 > 下篇带你从零开始：引导扇区 → 内核入口 → 进程调度 → 系统调用。
 > 看 Linus 当年 21 岁是怎么用 10000 行 C 代码撬动整个 UNIX 王朝的。
 
 现在问你：
 
-> 🎮 **动手挑战**：把上面的 Mini-Lang 代码敲一遍跑起来，然后在评论区贴出你的运行截图——`2 + 3 * 4` 算出来是多少？
+> 🎮 动手挑战：把上面的 Mini-Lang 代码敲一遍跑起来，然后在评论区贴出你的运行截图——`2 + 3 * 4` 算出来是多少？
 >
-> 💬 **思考题**：如果你要给自己设计的语言取个名字，你会叫它什么？为什么？评论区说出你的"造物主"宣言。
+> 💬 思考题：如果你要给自己设计的语言取个名字，你会叫它什么？为什么？评论区说出你的"造物主"宣言。
 >
 > 🔔 关注玄芯散人，修炼不迷路。下一篇带你看 Linus 怎么造出 Linux。
 

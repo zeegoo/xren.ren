@@ -49,6 +49,314 @@ features:
     linkText: 进入修炼 →
 ---
 
+<script setup>
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  // 把道友档案区从 vp-doc 移到 VPHero 之后
+  const about = document.querySelector('.xren-about');
+  const hero = document.querySelector('.VPHero');
+  if (about && hero && hero.parentElement) {
+    hero.parentElement.insertBefore(about, hero.nextSibling);
+  }
+
+  // 卡片入场动画
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '0'
+        entry.target.style.transform = 'translateY(24px)'
+        requestAnimationFrame(() => {
+          entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease'
+          entry.target.style.transitionDelay = `${i * 80}ms`
+          entry.target.style.opacity = '1'
+          entry.target.style.transform = 'translateY(0)'
+        })
+        observer.unobserve(entry.target)
+      }
+    })
+  }, { threshold: 0.1 })
+
+  document.querySelectorAll('.VPFeature').forEach(el => observer.observe(el))
+})
+</script>
+
+<!-- ============================================================
+     文章总目 - 30篇按境界分类
+     ============================================================ -->
+<div class="xren-toc">
+  <h2 class="xren-toc-title">::. 修仙篇目  .::</h2>
+  <p class="xren-toc-sub">三十篇正文 · 六大境界 · 从炼气到大乘</p>
+
+  <!-- 炼气期 -->
+  <details class="xren-toc-section" open>
+    <summary><span class="realm-icon">🔥</span> 炼气期 <span class="realm-sub">引气入体 · 三篇</span></summary>
+    <ul class="xren-toc-list">
+      <li><a href="/lianqi/01-what-is-lianqi">01 · 炼气期码农长什么样</a></li>
+      <li><a href="/lianqi/02-which-stage">02 · 你处于哪个阶段</a></li>
+      <li><a href="/lianqi/03-fast-breakthrough">03 · 为什么有人三个月筑基</a></li>
+    </ul>
+  </details>
+
+  <!-- 筑基期 -->
+  <details class="xren-toc-section" open>
+    <summary><span class="realm-icon">🏗️</span> 筑基期 <span class="realm-sub">四座地基 · 五篇</span></summary>
+    <ul class="xren-toc-list">
+      <li><a href="/zhuji/04-are-you-zhuji">04 · 你已经筑基了吗</a></li>
+      <li><a href="/zhuji/05-code-to-cpu">05 · 代码从写完到CPU执行</a></li>
+      <li><a href="/zhuji/06-data-structure-gongfa">06 · 数据结构就是功法</a></li>
+      <li><a href="/zhuji/07-os-tiandao">07 · 操作系统是天道规则</a></li>
+      <li><a href="/zhuji/08-network-array">08 · 网络是传送阵</a></li>
+    </ul>
+  </details>
+
+  <!-- 金丹期 -->
+  <details class="xren-toc-section" open>
+    <summary><span class="realm-icon">💎</span> 金丹期 <span class="realm-sub">系统级理解 · 六篇</span></summary>
+    <ul class="xren-toc-list">
+      <li><a href="/jindan/09-compiler">09 · 编译器对你代码做了什么</a></li>
+      <li><a href="/jindan/10-kernel-tiandao">10 · 操作系统内核是天道规则</a></li>
+      <li><a href="/jindan/11-tianyan">11 · 为什么金丹期看代码像开天眼</a></li>
+      <li><a href="/jindan/12-cache-tower">12 · CPU缓存三层塔</a></li>
+      <li><a href="/jindan/13-threading-model">13 · 线程模型与并发真相</a></li>
+      <li><a href="/jindan/14-memory-management">14 · 内存管理：堆栈的灵力分配</a></li>
+    </ul>
+  </details>
+
+  <!-- 元婴期 -->
+  <details class="xren-toc-section" open>
+    <summary><span class="realm-icon">👶</span> 元婴期 <span class="realm-sub">穿透到硬件 · 主场 · 六篇</span></summary>
+    <ul class="xren-toc-list">
+      <li><a href="/yuanying/15-instruction-set">15 · CPU指令集是天地法则</a></li>
+      <li><a href="/yuanying/16-c-to-transistor">16 · 从C代码到晶体管翻转</a></li>
+      <li><a href="/yuanying/17-embedded-yuanying">17 · 为什么嵌入式工程师天生在元婴期</a></li>
+      <li><a href="/yuanying/18-arm-vs-riscv">18 · ARM vs RISC-V大战</a></li>
+      <li><a href="/yuanying/19-driver-dev">19 · 驱动开发：沟通硬件的御灵术</a></li>
+      <li><a href="/yuanying/20-firmware">20 · 固件：开天辟地前最后一道工序</a></li>
+    </ul>
+  </details>
+
+  <!-- 化神期 -->
+  <details class="xren-toc-section" open>
+    <summary><span class="realm-icon">🌟</span> 化神期 <span class="realm-sub">造语言造系统 · 五篇</span></summary>
+    <ul class="xren-toc-list">
+      <li><a href="/huashen/21-create-language">21 · 创造编程语言需要什么</a></li>
+      <li><a href="/huashen/22-linus">22 · Linus为什么是化神大能</a></li>
+      <li><a href="/huashen/23-code-to-language">23 · 从写代码到造语言</a></li>
+      <li><a href="/huashen/24-build-os">24 · 操作系统是怎么炼成的</a></li>
+      <li><a href="/huashen/25-framework-design">25 · 框架设计的道与术</a></li>
+    </ul>
+  </details>
+
+  <!-- 渡劫 / 大乘 -->
+  <details class="xren-toc-section" open>
+    <summary><span class="realm-icon">⚡</span> 渡劫 / 大乘 <span class="realm-sub">改变行业的人 · 五篇</span></summary>
+    <ul class="xren-toc-list">
+      <li><a href="/dujie/26-von-neumann">26 · 冯·诺依曼架构</a></li>
+      <li><a href="/dujie/27-turing-machine">27 · 图灵机</a></li>
+      <li><a href="/dujie/28-full-map">28 · 修炼体系全景图</a></li>
+      <li><a href="/dujie/29-ultimate-question">29 · 计算机科学的终极之问</a></li>
+      <li><a href="/dujie/30-coder-destiny">30 · 码农修仙者的归宿</a></li>
+    </ul>
+  </details>
+</div>
+
+<style>
+/* ============================================================
+   文章总目 - 卷轴目录样式
+   ============================================================ */
+
+.xren-toc {
+  max-width: 900px;
+  margin: 0 auto 5rem;
+  padding: 2rem 2.5rem;
+  background:
+    linear-gradient(135deg,
+      rgba(245, 239, 224, 0.6) 0%,
+      rgba(239, 230, 207, 0.4) 100%);
+  border: 1px solid rgba(201, 169, 97, 0.35);
+  border-radius: 6px;
+  position: relative;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dark .xren-toc {
+  background:
+    linear-gradient(135deg,
+      rgba(26, 31, 40, 0.6) 0%,
+      rgba(20, 24, 31, 0.4) 100%);
+  border-color: rgba(224, 192, 120, 0.2);
+}
+
+.xren-toc::before {
+  content: "篇目总览";
+  position: absolute;
+  top: -10px;
+  left: 1.5rem;
+  padding: 0 8px;
+  background: var(--vp-c-bg, var(--xren-paper, #F5EFE0));
+  font-family: var(--xren-font-kai, serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--xren-cinnabar, #B23A48);
+}
+
+.dark .xren-toc::before {
+  background: var(--vp-c-bg, var(--xren-paper, #14181F));
+}
+
+.xren-toc-title {
+  font-family: var(--xren-font-kai, serif) !important;
+  font-size: 1.5rem !important;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--xren-ink, #1F2A37);
+  margin: 0 0 0.25rem !important;
+  text-align: center;
+}
+
+.dark .xren-toc-title {
+  color: var(--xren-ink, #E8E2D0);
+}
+
+.xren-toc-sub {
+  font-family: var(--xren-font-kai, serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--xren-ink-soft, #4A5568);
+  text-align: center;
+  margin: 0 0 1.75rem !important;
+  opacity: 0.7;
+}
+
+.dark .xren-toc-sub {
+  color: var(--xren-ink-soft, #A8A092);
+}
+
+.xren-toc-section {
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.dark .xren-toc-section {
+  border-color: rgba(224, 192, 120, 0.12);
+}
+
+.xren-toc-section summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.25rem;
+  font-family: var(--xren-font-kai, serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--xren-ink, #1F2A37);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  background: rgba(201, 169, 97, 0.06);
+  transition: background 0.3s ease;
+}
+
+.dark .xren-toc-section summary {
+  color: var(--xren-ink, #E8E2D0);
+  background: rgba(224, 192, 120, 0.04);
+}
+
+.xren-toc-section summary::-webkit-details-marker {
+  display: none;
+}
+
+.xren-toc-section summary:hover {
+  background: rgba(201, 169, 97, 0.12);
+}
+
+.dark .xren-toc-section summary:hover {
+  background: rgba(224, 192, 120, 0.08);
+}
+
+.xren-toc-section .realm-icon {
+  font-size: 1.2rem;
+}
+
+.xren-toc-section .realm-sub {
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--xren-ink-soft, #4A5568);
+  opacity: 0.7;
+  margin-left: auto;
+}
+
+.dark .xren-toc-section .realm-sub {
+  color: var(--xren-ink-soft, #A8A092);
+}
+
+.xren-toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  border-top: 1px dashed rgba(201, 169, 97, 0.2);
+}
+
+.dark .xren-toc-list {
+  border-top-color: rgba(224, 192, 120, 0.12);
+}
+
+.xren-toc-list li {
+  padding: 0;
+}
+
+.xren-toc-list a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.25rem 0.55rem 2.75rem;
+  font-family: var(--xren-font-serif, serif);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--xren-ink-soft, #4A5568);
+  text-decoration: none;
+  transition: all 0.25s ease;
+  border-left: 3px solid transparent;
+}
+
+.dark .xren-toc-list a {
+  color: var(--xren-ink-soft, #A8A092);
+}
+
+.xren-toc-list a:hover {
+  color: var(--xren-cinnabar, #B23A48);
+  background: rgba(178, 58, 72, 0.04);
+  border-left-color: var(--xren-cinnabar, #B23A48);
+  padding-left: 3rem;
+}
+
+.dark .xren-toc-list a:hover {
+  color: var(--xren-gold, #E0C078);
+  background: rgba(224, 192, 120, 0.04);
+  border-left-color: var(--xren-gold, #E0C078);
+}
+
+@media (max-width: 640px) {
+  .xren-toc {
+    padding: 1.5rem 1rem;
+  }
+  .xren-toc-section summary {
+    padding: 0.75rem 0.85rem;
+    font-size: 0.95rem;
+  }
+  .xren-toc-list a {
+    font-size: 0.85rem;
+    padding-left: 1.75rem;
+  }
+}
+</style>
+
 <!-- 古风字体：霞鹜文楷（CDN） + 系统楷书兜底 -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" />
@@ -930,36 +1238,3 @@ features:
   transform: translateX(3px);
 }
 </style>
-
-<script setup>
-// 卡片入场动画 + 道友档案区位置调整
-import { onMounted } from 'vue'
-
-onMounted(() => {
-  // 把道友档案区从 vp-doc 移到 VPHero 之后
-  const about = document.querySelector('.xren-about');
-  const hero = document.querySelector('.VPHero');
-  if (about && hero && hero.parentElement) {
-    hero.parentElement.insertBefore(about, hero.nextSibling);
-  }
-
-  // 卡片入场动画
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '0'
-        entry.target.style.transform = 'translateY(24px)'
-        requestAnimationFrame(() => {
-          entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease'
-          entry.target.style.transitionDelay = `${i * 80}ms`
-          entry.target.style.opacity = '1'
-          entry.target.style.transform = 'translateY(0)'
-        })
-        observer.unobserve(entry.target)
-      }
-    })
-  }, { threshold: 0.1 })
-
-  document.querySelectorAll('.VPFeature').forEach(el => observer.observe(el))
-})
-</script>
