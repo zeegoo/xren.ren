@@ -4,7 +4,7 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 export default withMermaid(defineConfig({
   title: '码农修仙传',
   description: '用修仙体系讲计算机技术成长路径',
-  // base 不设 /xren.ren/，由 Cloudflare Worker 透明代理处理路径前缀
+  base: '/xren.ren/',
 
   // 品牌标识
   themeConfig: {
