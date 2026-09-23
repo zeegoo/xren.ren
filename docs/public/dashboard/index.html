@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>码农修仙传 · 内容看板</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2332;
+    --border: #1e2d40;
+    --text: #e2e8f0;
+    --text-dim: #64748b;
+    --text-mid: #94a3b8;
+    --accent: #3b82f6;
+    --accent2: #8b5cf6;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --red: #ef4444;
+    --orange: #f97316;
+    --cyan: #06b6d4;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'PingFang SC','Noto Sans SC',-apple-system,sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* 认证遮罩 */
+  #auth {
+    position: fixed; inset: 0; z-index: 999;
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #auth.hidden { display: none; }
+  .auth-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px;
+    width: 360px;
+    text-align: center;
+  }
+  .auth-box h2 { font-size: 18px; margin-bottom: 20px; color: var(--accent); }
+  .auth-box input {
+    width: 100%; padding: 12px 16px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text); font-size: 14px;
+    margin-bottom: 16px; outline: none;
+  }
+  .auth-box input:focus { border-color: var(--accent); }
+  .auth-box button {
+    width: 100%; padding: 12px;
+    background: var(--accent); border: none; border-radius: 8px;
+    color: #fff; font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: background .2s;
+  }
+  .auth-box button:hover { background: #2563eb; }
+  .auth-error { color: var(--red); font-size: 13px; margin-top: 12px; display: none; }
+
+  /* 主容器 */
+  #app { display: none; padding: 24px 32px; max-width: 1400px; margin: 0 auto; }
+  #app.show { display: block; }
+
+  /* 头部 */
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .header h1 {
+    font-size: 24px; font-weight: 700;
+  }
+  .header h1 span { color: var(--accent); }
+  .header .meta { color: var(--text-dim); font-size: 13px; }
+
+  /* 统计卡片 */
+  .stats {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-card .num { font-size: 28px; font-weight: 800; }
+  .stat-card .label { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+
+  /* 筛选器 */
+  .filters {
+    display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;
+  }
+  .filter-group { display: flex; gap: 8px; align-items: center; }
+  .filter-group label { font-size: 13px; color: var(--text-dim); }
+  .filter-group select {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 6px; color: var(--text); padding: 6px 12px; font-size: 13px;
+    outline: none; cursor: pointer;
+  }
+  .filter-group select:focus { border-color: var(--accent); }
+
+  /* 表格 */
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead { background: var(--surface2); }
+  th {
+    padding: 12px 14px; text-align: left;
+    font-size: 12px; font-weight: 600; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  th:first-child { width: 40px; text-align: center; }
+  th:nth-child(2) { width: 60px; }
+  th:nth-child(3) { min-width: 200px; }
+  td {
+    padding: 10px 14px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    vertical-align: middle;
+  }
+  td:first-child { text-align: center; color: var(--text-dim); font-family: monospace; }
+  td:nth-child(2) { white-space: nowrap; }
+  
+  /* 境界标签 */
+  .realm-tag {
+    display: inline-block; padding: 2px 8px;
+    border-radius: 4px; font-size: 11px; font-weight: 600;
+  }
+  .realm-lianqi { background: rgba(234,179,8,0.15); color: #eab308; }
+  .realm-zhuji { background: rgba(249,115,22,0.15); color: #f97316; }
+  .realm-jindan { background: rgba(6,182,212,0.15); color: #06b6d4; }
+  .realm-yuanying { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+  .realm-huashen { background: rgba(233,69,96,0.15); color: #e94560; }
+  .realm-dujie { background: rgba(59,130,246,0.15); color: #3b82f6; }
+
+  /* 状态点 */
+  .status-cell { text-align: center; }
+  .status-dot {
+    display: inline-block; width: 20px; height: 20px;
+    border-radius: 50%; text-align: center; line-height: 20px;
+    font-size: 11px; cursor: pointer;
+  }
+  .dot-published { background: rgba(34,197,94,0.2); color: #22c55e; }
+  .dot-pending { background: rgba(234,179,8,0.15); color: #eab308; }
+  .dot-na { background: rgba(100,116,139,0.1); color: #64748b; }
+
+  /* 审核状态 */
+  .review-approved { color: var(--green); }
+  .review-needs-edit { color: var(--yellow); }
+  .review-draft { color: var(--text-dim); }
+
+  /* 标题链接 */
+  .article-title { color: var(--text); text-decoration: none; }
+  .article-title:hover { color: var(--accent); }
+  .article-title:visited { color: var(--text-mid); }
+
+  /* 进度条 */
+  .progress-bar {
+    width: 60px; height: 6px; background: var(--surface2);
+    border-radius: 3px; overflow: hidden; display: inline-block;
+    vertical-align: middle;
+  }
+  .progress-fill { height: 100%; border-radius: 3px; }
+
+  /* 备注 */
+  .notes { color: var(--text-dim); font-size: 12px; }
+
+  /* 编辑模式 */
+  .editable {
+    cursor: pointer; transition: transform .1s;
+  }
+  .editable:hover { transform: scale(1.2); }
+
+  /* 响应式 */
+  @media (max-width: 1024px) {
+    .stats { grid-template-columns: repeat(3, 1fr); }
+    th, td { font-size: 12px; padding: 8px 10px; }
+  }
+  @media (max-width: 768px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .filters { flex-direction: column; }
+    .table-wrap { overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 认证 -->
+<div id="auth">
+  <div class="auth-box">
+    <h2>🔒 码农修仙传 · 看板</h2>
+    <input type="text" id="userInput" placeholder="用户名" onkeydown="if(event.key==='Enter')document.getElementById('passInput').focus()">
+    <input type="password" id="passInput" placeholder="密码" onkeydown="if(event.key==='Enter')checkAuth()">
+    <button onclick="checkAuth()">进入看板</button>
+    <div class="auth-error" id="authError">用户名或密码错误，请重试</div>
+  </div>
+</div>
+
+<div id="app">
+  <!-- 头部 -->
+  <div class="header">
+    <h1>码农修仙传 · <span>内容看板</span></h1>
+    <div class="meta" id="lastUpdated">加载中...</div>
+  </div>
+
+  <!-- 统计卡片 -->
+  <div class="stats" id="stats"></div>
+
+  <!-- 筛选器 -->
+  <div class="filters">
+    <div class="filter-group">
+      <label>境界</label>
+      <select id="realmFilter" onchange="render()">
+        <option value="">全部</option>
+        <option value="炼气">🔥 炼气</option>
+        <option value="筑基">🏗️ 筑基</option>
+        <option value="金丹">💎 金丹</option>
+        <option value="元婴">👶 元婴</option>
+        <option value="化神">🌟 化神</option>
+        <option value="渡劫">⚡ 渡劫</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>审核状态</label>
+      <select id="reviewFilter" onchange="render()">
+        <option value="">全部</option>
+        <option value="approved">✅ 已通过</option>
+        <option value="needs_edit">⚠️ 待润色</option>
+        <option value="draft">📝 草稿</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>平台</label>
+      <select id="platformFilter" onchange="render()">
+        <option value="">全部</option>
+        <option value="juejin">掘金</option>
+        <option value="zhihu">知乎</option>
+        <option value="wechat">公众号</option>
+        <option value="csdn">CSDN</option>
+        <option value="toutiao">头条</option>
+      </select>
+    </div>
+  </div>
+
+
+  <!-- 系统状态模块 -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+    <!-- 写作进度 -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;">
+      <h3 style="font-size:15px;margin-bottom:16px;color:var(--accent);">📝 写作进度</h3>
+      <div id="writeProgress" style="font-size:13px;line-height:1.8;"></div>
+    </div>
+    <!-- 系统健康 -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;">
+      <h3 style="font-size:15px;margin-bottom:16px;color:var(--green);">🖥️ 系统健康</h3>
+      <div id="sysHealth" style="font-size:13px;line-height:1.8;"></div>
+    </div>
+    <!-- Cron状态 -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;">
+      <h3 style="font-size:15px;margin-bottom:16px;color:var(--accent2);">⏰ Cron任务状态</h3>
+      <div id="cronStatus" style="font-size:12px;line-height:1.6;"></div>
+    </div>
+    <!-- 发布状态 -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;">
+      <h3 style="font-size:15px;margin-bottom:16px;color:var(--orange);">📤 发布状态</h3>
+      <div id="pubStatus" style="font-size:13px;line-height:1.8;"></div>
+    </div>
+  </div>
+
+  <!-- 表格 -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>境界</th>
+          <th>标题</th>
+          <th class="status-cell">站点</th>
+          <th class="status-cell">掘金</th>
+          <th class="status-cell">知乎</th>
+          <th class="status-cell">公众号</th>
+          <th class="status-cell">CSDN</th>
+          <th class="status-cell">头条</th>
+          <th>审核</th>
+          <th>进度</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+// ====== 数据和密码 ======
+const USERNAME = 'zhouge';
+const PASSWORD = '19941101';
+let articles = [];
+
+// 状态映射
+const STATUS_MAP = {
+  'published': { dot: 'dot-published', icon: '✓', title: '已发布' },
+  'pending':   { dot: 'dot-pending', icon: '○', title: '待发布' },
+  'na':        { dot: 'dot-na', icon: '—', title: '不适用' }
+};
+
+const REALM_CLASS = {
+  '炼气': 'realm-lianqi', '筑基': 'realm-zhuji',
+  '金丹': 'realm-jindan', '元婴': 'realm-yuanying',
+  '化神': 'realm-huashen', '渡劫': 'realm-dujie'
+};
+
+const PLATFORMS = ['site','juejin','zhihu','wechat','csdn','toutiao'];
+const PLATFORM_NAMES = { site:'站点', juejin:'掘金', zhihu:'知乎', wechat:'公众号', csdn:'CSDN', toutiao:'头条' };
+
+const REVIEW_MAP = {
+  'approved':    { text: '✅ 已通过', cls: 'review-approved' },
+  'needs_edit':  { text: '⚠️ 待润色', cls: 'review-needs-edit' },
+  'draft':       { text: '📝 草稿', cls: 'review-draft' }
+};
+
+// ====== 认证 ======
+function checkAuth() {
+  const user = document.getElementById('userInput').value;
+  const pass = document.getElementById('passInput').value;
+  if (user === USERNAME && pass === PASSWORD) {
+    document.getElementById('auth').classList.add('hidden');
+    document.getElementById('app').classList.add('show');
+    loadData();
+  } else {
+    document.getElementById('authError').style.display = 'block';
+  }
+}
+
+// ====== 加载数据 ======
+async function loadData() {
+  try {
+    const resp = await fetch('https://xren.ren/api/articles.json');
+    if (!resp.ok) throw new Error('fetch failed');
+    articles = await resp.json();
+  } catch(e) {
+    // fallback to local
+    articles = LOCAL_DATA;
+  }
+  
+  // 如果是对象，取articles数组
+  if (articles.articles) articles = articles.articles;
+  
+  document.getElementById('lastUpdated').textContent = 
+    '最后更新：' + (articles.find(a => a.last_updated)?.last_updated || articles[0]?.last_updated || '未知');
+  
+  render();
+}
+
+// 本地fallback数据
+const LOCAL_DATA = [];
+
+// ====== 渲染 ======
+function render() {
+  const realmF = document.getElementById('realmFilter').value;
+  const reviewF = document.getElementById('reviewFilter').value;
+  const platformF = document.getElementById('platformFilter').value;
+
+  let filtered = articles.filter(a => {
+    if (realmF && a.realm !== realmF) return false;
+    if (reviewF && a.review !== reviewF) return false;
+    if (platformF && a[platformF] !== 'published') return false;
+    return true;
+  });
+
+  // 渲染统计
+  renderStats();
+
+  // 渲染表格
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+  
+  filtered.forEach(a => {
+    const tr = document.createElement('tr');
+    
+    // 编号
+    tr.innerHTML += `<td>${a.id}</td>`;
+    
+    // 境界
+    tr.innerHTML += `<td><span class="realm-tag ${REALM_CLASS[a.realm]||''}">${a.realm}</span></td>`;
+    
+    // 标题（链接到站点）
+    const url = `https://xren.ren/${a.realm === '炼气' ? 'lianqi' : a.realm === '筑基' ? 'zhuji' : a.realm === '金丹' ? 'jindan' : a.realm === '元婴' ? 'yuanying' : a.realm === '化神' ? 'huashen' : 'dujie'}/${a.id}-${slugify(a.title)}`;
+    tr.innerHTML += `<td><a href="${url}" target="_blank" class="article-title">${a.title}</a></td>`;
+    
+    // 平台状态
+    PLATFORMS.forEach(p => {
+      const status = a[p] || 'na';
+      const s = STATUS_MAP[status] || STATUS_MAP['na'];
+      tr.innerHTML += `<td class="status-cell"><span class="status-dot ${s.dot} editable" title="${s.title} - ${PLATFORM_NAMES[p]}" onclick="toggleStatus('${a.id}','${p}')">${s.icon}</span></td>`;
+    });
+    
+    // 审核
+    const r = REVIEW_MAP[a.review] || REVIEW_MAP['draft'];
+    tr.innerHTML += `<td><span class="${r.cls}">${r.text}</span></td>`;
+    
+    // 进度条
+    const published = PLATFORMS.filter(p => a[p] === 'published').length;
+    const pct = Math.round(published / PLATFORMS.length * 100);
+    const fillColor = pct === 100 ? '#22c55e' : pct >= 50 ? '#eab308' : '#64748b';
+    tr.innerHTML += `<td><div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${fillColor}"></div></div> ${pct}%</td>`;
+    
+    // 备注
+    tr.innerHTML += `<td class="notes">${a.notes || ''}</td>`;
+    
+    tbody.appendChild(tr);
+  });
+}
+
+function slugify(title) {
+  // 简单映射，实际URL需要在articles.json里配
+  return '';
+}
+
+// 切换状态
+function toggleStatus(id, platform) {
+  const a = articles.find(x => x.id === id);
+  if (!a) return;
+  const order = ['na','pending','published'];
+  const cur = order.indexOf(a[platform] || 'na');
+  a[platform] = order[(cur + 1) % order.length];
+  render();
+  // 实际使用时需要保存到后端
+}
+
+// 统计
+function renderStats() {
+  const total = articles.length;
+  const sitePub = articles.filter(a => a.site === 'published').length;
+  const juejinPub = articles.filter(a => a.juejin === 'published').length;
+  const zhihuPub = articles.filter(a => a.zhihu === 'published').length;
+  const wechatPub = articles.filter(a => a.wechat === 'published').length;
+  const needsEdit = articles.filter(a => a.review === 'needs_edit').length;
+
+  const stats = [
+    { num: total, label: '总文章', color: 'var(--accent)' },
+    { num: sitePub, label: '站点已发布', color: 'var(--green)' },
+    { num: juejinPub, label: '掘金已发', color: 'var(--cyan)' },
+    { num: zhihuPub, label: '知乎已发', color: 'var(--accent2)' },
+    { num: wechatPub, label: '公众号已发', color: 'var(--orange)' },
+    { num: needsEdit, label: '待润色', color: 'var(--yellow)' },
+  ];
+
+  document.getElementById('stats').innerHTML = stats.map(s => `
+    <div class="stat-card">
+      <div class="num" style="color:${s.color}">${s.num}</div>
+      <div class="label">${s.label}</div>
+    </div>
+  `).join('');
+}
+
+// 系统状态数据
+const SYSTEM_HEALTH = {"xren_ren": "OK", "ssh": "N/A", "disk": "5%", "chrome_procs": "9", "inspect_time": "2026-09-23 23:43"};
+const CRON_STATUS = [{"name": "码农修仙传-每小时写一篇", "schedule": "30 * * * *", "last_status": "ok", "last_run": "2026-09-23 23:30", "next_run": "2026-09-24 00:30"}, {"name": "每日文章发布", "schedule": "0 9,15 * * *", "last_status": "ok", "last_run": "2026-09-23 15:13", "next_run": "2026-09-24 09:00"}, {"name": "知乎写作研究(禁言期)", "schedule": "0 10 * * *", "last_status": "ok", "last_run": "2026-09-23 10:55", "next_run": "2026-09-24 10:00"}, {"name": "码农修仙传日报", "schedule": "0 20 * * *", "last_status": "ok", "last_run": "2026-09-23 20:02", "next_run": "2026-09-24 20:00"}, {"name": "码农修仙传·周排期检查", "schedule": "0 9 * * 1", "last_status": "ok", "last_run": "2026-09-21 09:02", "next_run": "2026-09-28 09:00"}, {"name": "工作日志记录", "schedule": "*/10 * * * *", "last_status": "running", "last_run": "2026-09-23 23:32", "next_run": "2026-09-23 23:50"}];
+const WRITE_PROGRESS = {"total": 180, "done": 180, "pending": 0, "pct": 100, "realms": {"炼气": {"done": 30, "pending": 0}, "筑基": {"done": 30, "pending": 0}, "金丹": {"done": 30, "pending": 0}, "元婴": {"done": 30, "pending": 0}, "化神": {"done": 30, "pending": 0}, "渡劫": {"done": 30, "pending": 0}}, "last_5": ["化神·127", "化神·123", "元婴·120", "元婴·119", "元婴·118"], "current": "全部完成"};
+const PUB_STATUS = {"csdn": 66, "zhihu": 0, "xren": 180, "last_publish": "2026-09-23 CSDN 068"};
+
+
+// 默认填充本地数据
+const EMBEDDED_DATA = {"xren_status": "OK", "ssh_status": "N/A", "ssh_detail": "VPS已过期废弃，xren.ren已迁移到GitHub Pages (zeegoo.github.io/xren.ren/)", "inspect_time": "2026-09-23 23:43", "disk": "5%", "chrome_procs": 9};
+
+const SYSTEM_STATUS = {
+  "writing_progress": {
+    "total": 180,
+    "published": 180,
+    "pending": 0,
+    "per_realm": {"炼气": 30, "筑基": 30, "金丹": 30, "元婴": 30, "化神": 30, "渡劫": 30},
+    "last_5": ["176", "177", "178", "179", "180"],
+    "current_in_progress": "180篇全部完成"
+  },
+  "system_health": {
+    "xren_ren": "OK",
+    "dashboard": "OK",
+    "ssh": "N/A",
+    "disk": "5%",
+    "chrome_tabs": 9,
+    "last_inspection": "2026-09-23 23:43"
+  }
+};
+// 渲染系统状态模块
+function renderSysModules() {
+  // 写作进度
+  const wp = WRITE_PROGRESS;
+  const realmColors = {'炼气':'#eab308','筑基':'#f97316','金丹':'#06b6d4','元婴':'#8b5cf6','化神':'#e94560','渡劫':'#3b82f6'};
+  let wpHtml = `<div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+    <span style="font-size:24px;font-weight:800;color:var(--green);">${wp.done}/${wp.total}</span>
+    <span style="font-size:24px;font-weight:800;color:var(--accent);">${wp.pct}%</span>
+  </div>`;
+  wpHtml += '<div style="width:100%;height:8px;background:var(--surface2);border-radius:4px;overflow:hidden;margin-bottom:12px;"><div style="height:100%;width:'+wp.pct+'%;background:linear-gradient(90deg,#22c55e,#3b82f6);border-radius:4px;"></div></div>';
+  wpHtml += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">';
+  for (const [realm, s] of Object.entries(wp.realms)) {
+    const c = realmColors[realm] || '#888';
+    wpHtml += `<div style="display:flex;align-items:center;gap:6px;"><span style="color:${c};font-weight:600;">${realm}</span> <span style="color:var(--text-dim);">${s.done}/${s.total}</span></div>`;
+  }
+  wpHtml += '</div>';
+  wpHtml += '<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);"><div style="color:var(--text-dim);font-size:12px;margin-bottom:6px;">最近完成5篇</div>';
+  wp.last5.forEach(a => {
+    wpHtml += `<div style="font-size:12px;color:var(--text-mid);">${a.id} [${a.realm}] ${a.title}</div>`;
+  });
+  wpHtml += '</div>';
+  document.getElementById('writeProgress').innerHTML = wpHtml;
+
+  // 系统健康
+  const sh = SYSTEM_HEALTH;
+  let shHtml = `<div style="display:flex;justify-content:space-between;"><span style="color:var(--text-dim);">xren.ren HTTP</span>`;
+  shHtml += `<span style="color:${sh.xren_ren==='200'?'var(--green)':'var(--red)'};font-weight:600;">${sh.xren_ren} ${sh.xren_ren==='200'?'✓':'✗'}</span></div>`;
+  shHtml += `<div style="display:flex;justify-content:space-between;"><span style="color:var(--text-dim);">SSH连接</span><span style="color:${sh.ssh==='OK'?'var(--green)':'var(--red)'};font-weight:600;">${sh.ssh}</span></div>`;
+  shHtml += `<div style="display:flex;justify-content:space-between;"><span style="color:var(--text-dim);">磁盘使用</span><span style="color:${parseInt(sh.disk)<90?'var(--green)':'var(--red)'};font-weight:600;">${sh.disk}</span></div>`;
+  shHtml += `<div style="display:flex;justify-content:space-between;"><span style="color:var(--text-dim);">巡检时间</span><span style="color:var(--text-mid);">${sh.inspect_time}</span></div>`;
+  document.getElementById('sysHealth').innerHTML = shHtml;
+
+  // Cron状态
+  let cronHtml = '<table style="width:100%;font-size:12px;"><thead><tr><th style="text-align:left;padding:4px;color:var(--text-dim);">任务</th><th style="text-align:left;padding:4px;color:var(--text-dim);">状态</th><th style="text-align:left;padding:4px;color:var(--text-dim);">上次运行</th></tr></thead><tbody>';
+  CRON_STATUS.forEach(c => {
+    const color = c.last_status === 'ok' ? 'var(--green)' : c.last_status === 'running' ? 'var(--cyan)' : 'var(--red)';
+    cronHtml += `<tr><td style="padding:4px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${c.name}</td><td style="padding:4px;color:${color};font-weight:600;">${c.last_status}</td><td style="padding:4px;color:var(--text-mid);">${c.last_run}</td></tr>`;
+  });
+  cronHtml += '</tbody></table>';
+  document.getElementById('cronStatus').innerHTML = cronHtml;
+
+  // 发布状态
+  const ps = PUB_STATUS;
+  let psHtml = `<div style="display:flex;justify-content:space-between;"><span style="color:var(--text-dim);">xren.ren 站点</span><span style="color:var(--green);font-weight:600;">${ps.xren} 篇</span></div>`;
+  psHtml += `<div style="display:flex;justify-content:space-between;"><span style="color:var(--text-dim);">CSDN</span><span style="color:var(--cyan);font-weight:600;">${ps.csdn} 篇</span></div>`;
+  psHtml += `<div style="display:flex;justify-content:space-between;"><span style="color:var(--text-dim);">知乎</span><span style="color:var(--accent2);font-weight:600;">${ps.zhihu} 篇</span></div>`;
+  document.getElementById('pubStatus').innerHTML = psHtml;
+}
+
+// 重写loadData，直接用内嵌数据
+function loadData() {
+  articles = EMBEDDED_DATA;
+  renderStats();
+  renderSysModules();
+  document.getElementById('lastUpdated').textContent = '最后更新：2026-09-22 09:57（巡检自动更新）';
+  render();
+}
+</script>
+</body>
+</html>
