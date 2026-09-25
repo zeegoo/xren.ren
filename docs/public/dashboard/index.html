@@ -465,14 +465,14 @@ function renderStats() {
 }
 
 // 系统状态数据
-const SYSTEM_HEALTH = {"xren_ren": "OK", "ssh": "N/A", "disk": "5%", "chrome_procs": "9", "inspect_time": "2026-09-23 23:43"};
-const CRON_STATUS = [{"name": "码农修仙传-每小时写一篇", "schedule": "30 * * * *", "last_status": "ok", "last_run": "2026-09-23 23:30", "next_run": "2026-09-24 00:30"}, {"name": "每日文章发布", "schedule": "0 9,15 * * *", "last_status": "ok", "last_run": "2026-09-23 15:13", "next_run": "2026-09-24 09:00"}, {"name": "知乎写作研究(禁言期)", "schedule": "0 10 * * *", "last_status": "ok", "last_run": "2026-09-23 10:55", "next_run": "2026-09-24 10:00"}, {"name": "码农修仙传日报", "schedule": "0 20 * * *", "last_status": "ok", "last_run": "2026-09-23 20:02", "next_run": "2026-09-24 20:00"}, {"name": "码农修仙传·周排期检查", "schedule": "0 9 * * 1", "last_status": "ok", "last_run": "2026-09-21 09:02", "next_run": "2026-09-28 09:00"}, {"name": "工作日志记录", "schedule": "*/10 * * * *", "last_status": "running", "last_run": "2026-09-23 23:32", "next_run": "2026-09-23 23:50"}];
+const SYSTEM_HEALTH = {"xren_ren": "000(TUN代理)", "ssh": "N/A", "disk": "5%", "chrome_procs": "10", "inspect_time": "2026-09-25 10:10"};
+const CRON_STATUS = [{"name": "码农修仙传-每小时写一篇", "schedule": "30 * * * *", "last_status": "ok", "last_run": "2026-09-25 09:30", "next_run": "2026-09-25 10:30"}, {"name": "每日文章发布", "schedule": "0 9,15 * * *", "last_status": "ok", "last_run": "2026-09-25 09:21", "next_run": "2026-09-25 15:00"}, {"name": "知乎写作研究(禁言期)", "schedule": "0 10 * * *", "last_status": "⚠️running超23h", "last_run": "2026-09-24 11:02", "next_run": "2026-09-26 10:00"}, {"name": "码农修仙传日报", "schedule": "0 20 * * *", "last_status": "ok", "last_run": "2026-09-24 20:01", "next_run": "2026-09-25 20:00"}, {"name": "码农修仙传·周排期检查", "schedule": "0 9 * * 1", "last_status": "ok", "last_run": "2026-09-21 09:02", "next_run": "2026-09-28 09:00"}, {"name": "工作日志记录", "schedule": "*/10 * * * *", "last_status": "ok", "last_run": "2026-09-25 10:03", "next_run": "2026-09-25 10:20"}];
 const WRITE_PROGRESS = {"total": 180, "done": 180, "pending": 0, "pct": 100, "realms": {"炼气": {"done": 30, "pending": 0}, "筑基": {"done": 30, "pending": 0}, "金丹": {"done": 30, "pending": 0}, "元婴": {"done": 30, "pending": 0}, "化神": {"done": 30, "pending": 0}, "渡劫": {"done": 30, "pending": 0}}, "last_5": ["化神·127", "化神·123", "元婴·120", "元婴·119", "元婴·118"], "current": "全部完成"};
-const PUB_STATUS = {"csdn": 66, "zhihu": 0, "xren": 180, "last_publish": "2026-09-23 CSDN 068"};
+const PUB_STATUS = {"csdn": 181, "zhihu": 0, "xren": 180, "last_publish": "2026-09-25 CSDN 09:21"};
 
 
 // 默认填充本地数据
-const EMBEDDED_DATA = {"xren_status": "OK", "ssh_status": "N/A", "ssh_detail": "VPS已过期废弃，xren.ren已迁移到GitHub Pages (zeegoo.github.io/xren.ren/)", "inspect_time": "2026-09-23 23:43", "disk": "5%", "chrome_procs": 9};
+const EMBEDDED_DATA = {"xren_status": "OK(代理阻断)", "ssh_status": "N/A", "ssh_detail": "VPS已过期废弃，xren.ren已迁移到GitHub Pages (zeegoo.github.io/xren.ren/)", "inspect_time": "2026-09-25 10:10", "disk": "5%", "chrome_procs": 10};
 
 const SYSTEM_STATUS = {
   "writing_progress": {
@@ -484,12 +484,12 @@ const SYSTEM_STATUS = {
     "current_in_progress": "180篇全部完成"
   },
   "system_health": {
-    "xren_ren": "OK",
-    "dashboard": "OK",
+    "xren_ren": "000(TUN代理)",
+    "dashboard": "200",
     "ssh": "N/A",
     "disk": "5%",
-    "chrome_tabs": 9,
-    "last_inspection": "2026-09-23 23:43"
+    "chrome_tabs": 10,
+    "last_inspection": "2026-09-25 10:10"
   }
 };
 // 渲染系统状态模块
