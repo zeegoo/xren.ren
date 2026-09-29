@@ -465,14 +465,14 @@ function renderStats() {
 }
 
 // 系统状态数据
-const SYSTEM_HEALTH = {"xren_ren": "200(301→www)", "ssh": "N/A(VPS过期)", "disk": "5%", "chrome_procs": "0", "inspect_time": "2026-09-29 13:20"};
-const CRON_STATUS = [{"name": "码农修仙传-每小时写一篇", "schedule": "30 * * * *", "last_status": "ok", "last_run": "2026-09-29 12:30", "next_run": "2026-09-29 13:30"}, {"name": "每日文章发布(CSDN)", "schedule": "0 9,15 * * *", "last_status": "❌error", "last_run": "2026-09-29 10:10", "next_run": "2026-09-29 15:00", "error": "TimeoutError: TERMINAL_CWD read lock 660s"}, {"name": "知乎写作研究(禁言期)", "schedule": "0 10 * * *", "last_status": "❌error", "last_run": "2026-09-29 10:10", "next_run": "2026-09-30 10:00", "error": "TimeoutError: TERMINAL_CWD read lock 660s"}, {"name": "码农修仙传日报", "schedule": "0 20 * * *", "last_status": "ok", "last_run": "2026-09-29 10:03", "next_run": "2026-09-29 20:00"}, {"name": "工作日志记录(巡检)", "schedule": "*/10 * * * *", "last_status": "running", "last_run": "2026-09-29 13:12", "next_run": "2026-09-29 13:30"}, {"name": "码农修仙传·周排期检查", "schedule": "0 9 * * 1", "last_status": "ok", "last_run": "2026-09-29 10:10", "next_run": "2026-10-05 09:00"}];
+const SYSTEM_HEALTH = {"xren_ren": "200", "ssh": "N/A(VPS过期)", "disk": "5%", "chrome_procs": "0", "inspect_time": "2026-09-29 15:20"};
+const CRON_STATUS = [{"name": "码农修仙传-每小时写一篇", "schedule": "30 * * * *", "last_status": "ok", "last_run": "2026-09-29 14:30", "next_run": "2026-09-29 15:30"}, {"name": "每日文章发布(CSDN)", "schedule": "0 9,15 * * *", "last_status": "ok", "last_run": "2026-09-29 15:07", "next_run": "2026-09-30 09:00"}, {"name": "知乎写作研究(禁言期)", "schedule": "0 10 * * *", "last_status": "error", "last_run": "2026-09-29 10:10", "next_run": "2026-09-30 10:00", "error": "TimeoutError: TERMINAL_CWD read lock 660s"}, {"name": "码农修仙传日报", "schedule": "0 20 * * *", "last_status": "ok", "last_run": "2026-09-29 10:03", "next_run": "2026-09-29 20:00"}, {"name": "工作日志记录(巡检)", "schedule": "*/10 * * * *", "last_status": "running", "last_run": "2026-09-29 15:12", "next_run": "2026-09-29 15:30"}, {"name": "码农修仙传·周排期检查", "schedule": "0 9 * * 1", "last_status": "ok", "last_run": "2026-09-29 10:10", "next_run": "2026-10-05 09:00"}];
 const WRITE_PROGRESS = {"total": 180, "done": 180, "pending": 0, "pct": 100, "realms": {"炼气": {"done": 30, "pending": 0}, "筑基": {"done": 30, "pending": 0}, "金丹": {"done": 30, "pending": 0}, "元婴": {"done": 30, "pending": 0}, "化神": {"done": 30, "pending": 0}, "渡劫": {"done": 30, "pending": 0}}, "last_5": ["渡劫·180: 大道至简", "渡劫·179: 技术人的健康", "渡劫·178: 技术社区和人脉", "渡劫·177: 读源码vs写项目", "渡劫·176: 技术人的知识管理"], "current": "全部完成 🎉"};
 const PUB_STATUS = {"csdn": 181, "zhihu": 0, "xren": 180, "last_publish": "2026-09-25 CSDN 09:21"};
 
 
 // 默认填充本地数据
-const EMBEDDED_DATA = {"xren_status": "200", "ssh_status": "N/A", "ssh_detail": "VPS已过期废弃，xren.ren已迁移到GitHub Pages", "inspect_time": "2026-09-29 14:00", "disk": "5%", "chrome_procs": 0, "crons": [{"name": "码农修仙传-每小时写一篇", "id": "f00034da0df6", "schedule": "30 * * * *", "last_status": "ok", "last_run": "13:30", "next_run": "14:30", "anomaly": false}, {"name": "每日文章发布(CSDN)", "id": "2956285d2d26", "schedule": "0 9,15 * * *", "last_status": "error", "last_run": "10:10 failed", "next_run": "15:00", "anomaly": true, "issue": "TERMINAL_CWD lock contention"}, {"name": "知乎写作研究", "id": "466cfb895a6d", "schedule": "0 10 * * *", "last_status": "error", "last_run": "10:10 failed", "next_run": "明日10:00", "anomaly": true, "issue": "TERMINAL_CWD lock contention"}, {"name": "码农修仙传日报", "id": "f57075a0cb78", "schedule": "0 20 * * *", "last_status": "ok", "last_run": "10:03", "next_run": "20:00", "anomaly": false}, {"name": "码农修仙传·周排期检查", "id": "eadfaee664cf", "schedule": "0 9 * * 1", "last_status": "ok", "last_run": "10:10", "next_run": "10-05 09:00", "anomaly": false}]};
+const EMBEDDED_DATA = {"xren_status": "200", "ssh_status": "N/A", "ssh_detail": "VPS已过期废弃，xren.ren已迁移到GitHub Pages", "inspect_time": "2026-09-29 15:20", "disk": "5%", "chrome_procs": 0, "crons": [{"name": "码农修仙传-每小时写一篇", "id": "f00034da0df6", "schedule": "30 * * * *", "last_status": "ok", "last_run": "14:30", "next_run": "15:30", "anomaly": false}, {"name": "每日文章发布(CSDN)", "id": "2956285d2d26", "schedule": "0 9,15 * * *", "last_status": "ok", "last_run": "15:07", "next_run": "明日09:00", "anomaly": false}, {"name": "知乎写作研究", "id": "466cfb895a6d", "schedule": "0 10 * * *", "last_status": "error", "last_run": "10:10 failed", "next_run": "明日10:00", "anomaly": true, "issue": "TERMINAL_CWD lock contention with 周排期cron"}, {"name": "码农修仙传日报", "id": "f57075a0cb78", "schedule": "0 20 * * *", "last_status": "ok", "last_run": "10:03", "next_run": "20:00", "anomaly": false}, {"name": "码农修仙传·周排期检查", "id": "eadfaee664cf", "schedule": "0 9 * * 1", "last_status": "ok", "last_run": "10:10", "next_run": "10-05 09:00", "anomaly": false}]};
 
 const SYSTEM_STATUS = {
   "writing_progress": {
@@ -484,12 +484,12 @@ const SYSTEM_STATUS = {
     "current_in_progress": "180篇全部完成"
   },
   "system_health": {
-    "xren_ren": "000(TUN代理)",
+    "xren_ren": "200",
     "dashboard": "200",
     "ssh": "N/A",
     "disk": "5%",
-    "chrome_tabs": 10,
-    "last_inspection": "2026-09-25 10:10"
+    "chrome_tabs": 0,
+    "last_inspection": "2026-09-29 15:20"
   }
 };
 // 渲染系统状态模块
