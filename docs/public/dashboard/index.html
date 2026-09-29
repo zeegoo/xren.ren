@@ -472,7 +472,7 @@ const PUB_STATUS = {"csdn": 181, "zhihu": 0, "xren": 180, "last_publish": "2026-
 
 
 // 默认填充本地数据
-const EMBEDDED_DATA = {"xren_status": "200", "ssh_status": "N/A", "ssh_detail": "VPS已过期废弃，xren.ren已迁移到GitHub Pages", "inspect_time": "2026-09-29 15:20", "disk": "5%", "chrome_procs": 0, "crons": [{"name": "码农修仙传-每小时写一篇", "id": "f00034da0df6", "schedule": "30 * * * *", "last_status": "ok", "last_run": "14:30", "next_run": "15:30", "anomaly": false}, {"name": "每日文章发布(CSDN)", "id": "2956285d2d26", "schedule": "0 9,15 * * *", "last_status": "ok", "last_run": "15:07", "next_run": "明日09:00", "anomaly": false}, {"name": "知乎写作研究", "id": "466cfb895a6d", "schedule": "0 10 * * *", "last_status": "error", "last_run": "10:10 failed", "next_run": "明日10:00", "anomaly": true, "issue": "TERMINAL_CWD lock contention with 周排期cron"}, {"name": "码农修仙传日报", "id": "f57075a0cb78", "schedule": "0 20 * * *", "last_status": "ok", "last_run": "10:03", "next_run": "20:00", "anomaly": false}, {"name": "码农修仙传·周排期检查", "id": "eadfaee664cf", "schedule": "0 9 * * 1", "last_status": "ok", "last_run": "10:10", "next_run": "10-05 09:00", "anomaly": false}]};
+const EMBEDDED_DATA = {"xren_status": "200", "ssh_status": "N/A", "ssh_detail": "VPS已过期废弃，xren.ren已迁移到GitHub Pages", "inspect_time": "2026-09-29 18:00", "disk": "5%", "chrome_procs": 3, "crons": [{"name": "码农修仙传-每小时写一篇", "id": "f00034da0df6", "schedule": "30 * * * *", "last_status": "ok", "last_run": "17:30", "next_run": "18:30", "anomaly": false}, {"name": "每日文章发布(CSDN)", "id": "2956285d2d26", "schedule": "0 9,15 * * *", "last_status": "ok", "last_run": "15:07", "next_run": "明日09:00", "anomaly": false}, {"name": "知乎写作研究", "id": "466cfb895a6d", "schedule": "0 10 * * *", "last_status": "error", "last_run": "10:10 failed", "next_run": "明日10:00", "anomaly": true, "issue": "TERMINAL_CWD lock contention timeout 660s"}, {"name": "码农修仙传日报", "id": "f57075a0cb78", "schedule": "0 20 * * *", "last_status": "ok", "last_run": "10:03", "next_run": "20:00", "anomaly": false}, {"name": "码农修仙传·周排期检查", "id": "eadfaee664cf", "schedule": "0 9 * * 1", "last_status": "ok", "last_run": "10:10", "next_run": "10-05 09:00", "anomaly": false}]};
 
 const SYSTEM_STATUS = {
   "writing_progress": {
@@ -488,8 +488,8 @@ const SYSTEM_STATUS = {
     "dashboard": "200",
     "ssh": "N/A",
     "disk": "5%",
-    "chrome_tabs": 0,
-    "last_inspection": "2026-09-29 15:20"
+    "chrome_tabs": 3,
+    "last_inspection": "2026-09-29 18:00"
   }
 };
 // 渲染系统状态模块
