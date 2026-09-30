@@ -472,7 +472,7 @@ const PUB_STATUS = {"csdn": 181, "zhihu": 0, "xren": 180, "last_publish": "2026-
 
 
 // 默认填充本地数据
-const EMBEDDED_DATA = {"xren_status":"200","ssh_status":"N/A","ssh_detail":"VPS已过期废弃，xren.ren已迁移到GitHub Pages","inspect_time":"2026-09-30 15:00","disk":"5%","chrome_procs":3,"crons":[{"name":"码农修仙传-每小时写一篇","id":"f00034da0df6","schedule":"30 * * * *","last_status":"ok","last_run":"14:30","next_run":"15:30","anomaly":false},{"name":"每日文章发布(CSDN)","id":"2956285d2d26","schedule":"0 9,15 * * *","last_status":"running(卡住)","last_run":"09:04开始至今未完成","next_run":"10-01 09:00","anomaly":true,"issue":"卡在running状态已6小时，15:00发布点已跳过"},{"name":"知乎写作研究","id":"466cfb895a6d","schedule":"0 10 * * *","last_status":"error","last_run":"10:01 failed(连续2次)","next_run":"10-01 10:00","anomaly":true,"issue":"Connection error + 飞书SSL证书验证失败(self-signed cert)"},{"name":"码农修仙传日报","id":"f57075a0cb78","schedule":"0 20 * * *","last_status":"ok","last_run":"09-29 20:02","next_run":"今天 20:00","anomaly":false},{"name":"码农修仙传·周排期检查","id":"eadfaee664cf","schedule":"0 9 * * 1","last_status":"ok","last_run":"09-29 10:10","next_run":"10-05 09:00","anomaly":false}]};
+const EMBEDDED_DATA = {"xren_status":"200(www)","ssh_status":"N/A","ssh_detail":"VPS已过期废弃，xren.ren已迁移到GitHub Pages。xren.ren(非www)SSL握手失败(exit 35)，www.xren.ren正常","inspect_time":"2026-09-30 15:55","disk":"5%","chrome_procs":3,"crons":[{"name":"码农修仙传-每小时写一篇","id":"f00034da0df6","schedule":"30 * * * *","last_status":"ok","last_run":"15:30","next_run":"16:30","anomaly":false},{"name":"每日文章发布(CSDN)","id":"2956285d2d26","schedule":"0 9,15 * * *","last_status":"ok","last_run":"15:03","next_run":"10-01 09:00","anomaly":false},{"name":"知乎写作研究","id":"466cfb895a6d","schedule":"0 10 * * *","last_status":"error","last_run":"10:01 failed(连续2次)","next_run":"10-01 10:00","anomaly":true,"issue":"Connection error + 飞书SSL证书验证失败(self-signed cert)"},{"name":"码农修仙传日报","id":"f57075a0cb78","schedule":"0 20 * * *","last_status":"ok","last_run":"09-29 20:02","next_run":"今天 20:00","anomaly":false},{"name":"码农修仙传·周排期检查","id":"eadfaee664cf","schedule":"0 9 * * 1","last_status":"ok","last_run":"09-29 10:10","next_run":"10-05 09:00","anomaly":false}]};
 
 const SYSTEM_STATUS = {
   "writing_progress": {
@@ -484,12 +484,12 @@ const SYSTEM_STATUS = {
     "current_in_progress": "180篇全部完成"
   },
   "system_health": {
-    "xren_ren": "200",
+    "xren_ren": "200(www)",
     "dashboard": "200",
     "ssh": "N/A",
     "disk": "5%",
     "chrome_tabs": 3,
-    "last_inspection": "2026-09-30 00:40"
+    "last_inspection": "2026-09-30 15:55"
   }
 };
 // 渲染系统状态模块
