@@ -465,14 +465,14 @@ function renderStats() {
 }
 
 // 系统状态数据
-const SYSTEM_HEALTH = {"xren_ren": "200(www)", "ssh": "N/A(VPS过期)", "disk": "5%", "chrome_procs": "3", "inspect_time": "2026-10-21 15:50"};
-const CRON_STATUS = [{"name": "码农修仙传-每小时写一篇", "schedule": "30 * * * *", "last_status": "ok", "last_run": "10-21 15:30", "next_run": "10-21 16:30"}, {"name": "每日文章发布(CSDN)", "schedule": "0 9,15 * * *", "last_status": "ok", "last_run": "10-21 15:05", "next_run": "10-22 09:00"}, {"name": "知乎写作研究", "schedule": "0 10 * * *", "last_status": "ok", "last_run": "10-21 10:48", "next_run": "10-22 10:00"}, {"name": "码农修仙传日报", "schedule": "0 20 * * *", "last_status": "ok", "last_run": "10-20 20:02", "next_run": "10-21 20:00"}, {"name": "工作日志记录(巡检)", "schedule": "*/10 * * * *", "last_status": "running", "last_run": "10-21 15:41", "next_run": "10-21 16:00"}, {"name": "码农修仙传·周排期检查", "schedule": "0 9 * * 1", "last_status": "ok", "last_run": "10-19 09:05", "next_run": "10-26 09:00"}];
+const SYSTEM_HEALTH = {"xren_ren": "200(www)", "ssh": "N/A(VPS过期)", "disk": "5%", "chrome_procs": "3", "inspect_time": "2026-10-25 17:45"};
+const CRON_STATUS = [{"name": "码农修仙传-每小时写一篇", "schedule": "30 * * * *", "last_status": "ok", "last_run": "10-25 17:30", "next_run": "10-25 18:30"}, {"name": "每日文章发布(CSDN)", "schedule": "0 9,15 * * *", "last_status": "ok", "last_run": "10-25 15:04", "next_run": "10-26 09:00"}, {"name": "知乎写作研究", "schedule": "0 10 * * *", "last_status": "ok", "last_run": "10-25 10:12", "next_run": "10-26 10:00"}, {"name": "码农修仙传日报", "schedule": "0 20 * * *", "last_status": "ok", "last_run": "10-24 20:02", "next_run": "10-25 20:00"}, {"name": "工作日志记录(巡检)", "schedule": "*/10 * * * *", "last_status": "running", "last_run": "10-25 17:31", "next_run": "10-25 17:50"}, {"name": "码农修仙传·周排期检查", "schedule": "0 9 * * 1", "last_status": "ok", "last_run": "10-19 09:05", "next_run": "10-26 09:00"}];
 const WRITE_PROGRESS = {"total": 180, "done": 180, "pending": 0, "pct": 100, "realms": {"炼气": {"done": 30, "pending": 0}, "筑基": {"done": 30, "pending": 0}, "金丹": {"done": 30, "pending": 0}, "元婴": {"done": 30, "pending": 0}, "化神": {"done": 30, "pending": 0}, "渡劫": {"done": 30, "pending": 0}}, "last_5": ["渡劫·180: 大道至简", "渡劫·179: 技术人的健康", "渡劫·178: 技术社区和人脉", "渡劫·177: 读源码vs写项目", "渡劫·176: 技术人的知识管理"], "current": "全部完成 🎉"};
-const PUB_STATUS = {"csdn": 99, "zhihu": 11, "xren": 95, "last_publish": "2026-10-20 CSDN 09:04"};
+const PUB_STATUS = {"csdn": 181, "zhihu": "禁言期", "xren": 215, "last_publish": "2026-10-25 CSDN 15:04"};
 
 
 // 默认填充本地数据
-const EMBEDDED_DATA = {"xren_status":"✅ 200 (www.xren.ren via Cloudflare Pages)","xren_detail":"xren.ren 301→www.xren.ren 200正常。GitHub Pages备用站也正常。","ssh_status":"N/A (VPS expired)","ssh_detail":"xren.ren now on Cloudflare Pages + GitHub Pages. Old VPS 43.135.53.100 expired.","inspect_time":"2026-10-21 15:50","disk":"5% (12Gi/460Gi)","chrome_procs":3,"writing_progress":{"total":210,"completed":210,"pending":0,"drafts":196,"vitepress_pages":210,"per_realm":{"炼气":"30/30","筑基":"35/35","金丹":"36/36","元婴":"39/39","化神":"35/35","渡劫":"35/35"}},"publish_status":{"xren_ren":210,"csdn":182,"csdn_detail":"已发182篇文件（截至10/21 15:50）","zhihu":"11篇（知乎引流，禁言期模式）","juejin":"停止发布（Vue按钮问题）","last_csdn_time":"2026-10-21 15:05"},"crons":[{"name":"mncxc-write","id":"f00034da0df6","schedule":"30 * * * *","last_status":"ok","last_run":"2026-10-21 15:30","next_run":"2026-10-21 16:30","repeat":"∞","enabled":true},{"name":"CSDN-publish","id":"2956285d2d26","schedule":"0 9,15 * * *","last_status":"ok","last_run":"2026-10-21 15:05","next_run":"2026-10-22 09:00","repeat":"∞","enabled":true},{"name":"zhihu-write","id":"466cfb895a6d","schedule":"0 10 * * *","last_status":"ok","last_run":"2026-10-21 10:48","next_run":"2026-10-22 10:00","repeat":"∞","enabled":true},{"name":"daily-report","id":"f57075a0cb78","schedule":"0 20 * * *","last_status":"ok","last_run":"2026-10-20 20:02","next_run":"2026-10-21 20:00","repeat":"∞","enabled":true},{"name":"sys-inspect","id":"f9ad2be47089","schedule":"*/10 * * * *","last_status":"running","last_run":"2026-10-21 15:41","next_run":"2026-10-21 16:00","repeat":"∞","enabled":true},{"name":"weekly-plan","id":"eadfaee664cf","schedule":"0 9 * * 1","last_status":"ok","last_run":"2026-10-19 09:05","next_run":"2026-10-26 09:00","repeat":"∞","enabled":true}]};
+const EMBEDDED_DATA = {"xren_status":"✅ 200 (www.xren.ren via Cloudflare Pages)","xren_detail":"xren.ren 301→www.xren.ren 200正常。GitHub Pages备用站也正常。","ssh_status":"N/A (VPS expired)","ssh_detail":"xren.ren now on Cloudflare Pages + GitHub Pages. Old VPS 43.135.53.100 expired.","inspect_time":"2026-10-25 17:45","disk":"5% (12Gi/460Gi)","chrome_procs":3,"writing_progress":{"total":180,"completed":180,"pending":0,"drafts":180,"vitepress_pages":215,"per_realm":{"炼气":"30/30","筑基":"30/30","金丹":"30/30","元婴":"30/30","化神":"30/30","渡劫":"30/30"}},"publish_status":{"xren_ren":215,"csdn":181,"csdn_detail":"已发181篇文件（截至10/25 17:45）","zhihu":"禁言期模式（每日1篇引流）","juejin":"停止发布（Vue按钮问题）","last_csdn_time":"2026-10-25 15:05"},"crons":[{"name":"mncxc-write","id":"f00034da0df6","schedule":"30 * * * *","last_status":"ok","last_run":"2026-10-25 17:30","next_run":"2026-10-25 18:30","repeat":"∞","enabled":true},{"name":"CSDN-publish","id":"2956285d2d26","schedule":"0 9,15 * * *","last_status":"ok","last_run":"2026-10-25 15:04","next_run":"2026-10-26 09:00","repeat":"∞","enabled":true},{"name":"zhihu-write","id":"466cfb895a6d","schedule":"0 10 * * *","last_status":"ok","last_run":"2026-10-25 10:12","next_run":"2026-10-26 10:00","repeat":"∞","enabled":true},{"name":"daily-report","id":"f57075a0cb78","schedule":"0 20 * * *","last_status":"ok","last_run":"2026-10-24 20:02","next_run":"2026-10-25 20:00","repeat":"∞","enabled":true},{"name":"sys-inspect","id":"f9ad2be47089","schedule":"*/10 * * * *","last_status":"running","last_run":"2026-10-25 17:31","next_run":"2026-10-25 17:50","repeat":"∞","enabled":true},{"name":"weekly-plan","id":"eadfaee664cf","schedule":"0 9 * * 1","last_status":"ok","last_run":"2026-10-19 09:05","next_run":"2026-10-26 09:00","repeat":"∞","enabled":true}]};
 const SYSTEM_STATUS = {
   "writing_progress": {
     "total": 180,
@@ -480,15 +480,15 @@ const SYSTEM_STATUS = {
     "pending": 0,
     "per_realm": {"炼气": 30, "筑基": 30, "金丹": 30, "元婴": 30, "化神": 30, "渡劫": 30},
     "last_5": ["176", "177", "178", "179", "180"],
-    "current_in_progress": "180篇全部完成"
+    "current_in_progress": "180篇全部完成 🎉"
   },
   "system_health": {
-    "xren_ren": "⚠️ HTTPS timeout",
+    "xren_ren": "✅ 200",
     "dashboard": "200",
     "ssh": "N/A",
     "disk": "5%",
     "chrome_tabs": 3,
-    "last_inspection": "2026-10-20 12:50"
+    "last_inspection": "2026-10-25 17:45"
   }
 };
 // 渲染系统状态模块
@@ -545,7 +545,7 @@ function loadData() {
   articles = EMBEDDED_DATA;
   renderStats();
   renderSysModules();
-  document.getElementById('lastUpdated').textContent = '最后更新：2026-10-20 10:40（巡检自动更新）';
+  document.getElementById('lastUpdated').textContent = '最后更新：2026-10-25 17:45（巡检自动更新）';
   render();
 }
 </script>
