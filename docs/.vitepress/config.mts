@@ -124,6 +124,9 @@ export default withMermaid(defineConfig({
             { text: 'ARM vs RISC-V大战', link: '/yuanying/18-arm-vs-riscv' },
             { text: '驱动开发：沟通硬件的御灵术', link: '/yuanying/19-driver-dev' },
             { text: '固件：开天辟地前最后一道工序', link: '/yuanying/20-firmware' },
+            { text: 'Datasheet怎么读', link: '/yuanying/095-datasheet' },
+            { text: '0和1背后的数学：布尔代数和数字电路基础', link: '/yuanying/096-boolean-algebra' },
+            { text: '元婴期修炼路径：从点灯到写固件', link: '/yuanying/097-cultivation-path' },
           ]
         }
       ],
