@@ -1,6 +1,6 @@
 # xren.ren · VitePress 站点
 
-> 项目路径：`/Users/zhouge/ai/xren/`
+> 项目路径：`/Users/zhouge/mncxc/site/`
 > 域名：xren.ren（Cloudflare Pages 部署）
 > 定位：「码农修仙传」IP 的品牌入口和内容主站
 
