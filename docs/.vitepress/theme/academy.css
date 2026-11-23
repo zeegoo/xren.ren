@@ -43,7 +43,7 @@
 .realm-card:hover{transform:translateY(-5px);box-shadow:0 12px 30px #14392a12;border-color:#76a58a}
 .realm-card h3{font-size:32px}.realm-card:nth-child(4){border-color:#a98b50;background:linear-gradient(135deg,var(--vp-c-bg),#c3a56112)}
 .realm-card:nth-child(4) b{color:#a38242}
-.realm-overview{position:relative}.realm-overview>h1{padding:27px 28px;margin:20px 0!important;background:linear-gradient(120deg,#102c29,#245344);color:#eaeed9;border-radius:6px;box-shadow:inset 4px 0 #b3c789;letter-spacing:2px}
+.realm-overview{position:relative}
 .course-group-title>span{border:1px solid #8caaa050;padding:8px 10px;min-width:46px;text-align:center;font-size:20px;transform:rotate(-4deg)}
 .lesson-list a{transition:background .2s,padding .2s}.lesson-list a:hover{padding-left:28px;background:#5b96720a}
 @media(max-width:960px){.VPHero .text{font-size:46px!important}.chip-scene{transform:scale(.82);transform-origin:center}.VPHero .image{min-height:320px}.VPHero .image-container{height:330px}}
@@ -73,8 +73,7 @@
 .vp-doc table{border-radius:7px;overflow:hidden;font-size:14px}.vp-doc th{background:#24665b!important;color:#e8f0e5!important}.vp-doc tr{background:var(--vp-c-bg)}.vp-doc tr:nth-child(2n){background:var(--vp-c-bg-soft)}
 .VPDocAsideOutline{border-left:1px solid var(--vp-c-divider);padding:16px 10px;border-radius:5px;background:var(--vp-c-bg-soft)}
 .VPDocFooter .pager-link{border-color:var(--vp-c-divider);background:var(--vp-c-bg-soft);transition:transform .2s,border-color .2s}.VPDocFooter .pager-link:hover{transform:translateY(-3px);border-color:var(--vp-c-brand-1)}
-.realm-overview>h1{background:none!important;color:var(--vp-c-text-1)!important;box-shadow:none!important;padding:0!important}
-.dark .realm-card:nth-child(4){background:linear-gradient(135deg,#182725,#393421)}
+.dark .realm-card:nth-child(4){background:radial-gradient(240px 170px at 86% 10%,#b99a4a26,transparent 72%),linear-gradient(135deg,#101b18,#18211d);box-shadow:inset 0 0 0 1px #b99a4a55}
 @media(max-width:640px){.gateway-banner{padding:22px 18px}.gateway-banner strong{font-size:25px}.gateway-mark{width:55px;height:55px;font-size:20px;padding-top:8px}.gateway-kicker{font-size:9px;letter-spacing:1px}.gateway-sub{font-size:10px}.VPDoc .vp-doc>h1{font-size:25px}}
 @media(prefers-reduced-motion:reduce){.VPDocFooter .pager-link{transition:none}}
 .realm-character-card{isolation:isolate;display:flex;flex-direction:column;min-height:272px;padding-right:138px!important}.realm-character{position:absolute;right:2px;bottom:2px;width:142px;height:220px;object-fit:contain;object-position:bottom right;filter:drop-shadow(0 8px 12px #204b3929);transition:transform .3s;pointer-events:none;z-index:0}.realm-character-card:hover .realm-character{transform:translateY(-6px)}.realm-character-card h3 span{display:block;margin:10px 0 0}.realm-character-card small,.realm-character-card h3,.realm-character-card p,.realm-character-card b{position:relative;z-index:1}.realm-character-card p{max-width:180px;text-wrap:balance}.gateway-character{height:155px;width:130px;object-fit:contain;align-self:end;margin:-18px -10px -26px 0;filter:drop-shadow(0 0 14px #8ed2a52a)}
@@ -93,3 +92,17 @@
 .VPDoc:has(.realm-overview) .gateway-kicker{font-size:11px}
 .VPDoc:has(.realm-overview) .gateway-character{height:152px;width:138px;margin:-6px -8px -24px 0}
 @media(max-width:640px){.VPDoc:has(.realm-overview) .gateway-banner{padding:24px 18px}.VPDoc:has(.realm-overview) .gateway-banner strong{font-size:28px;letter-spacing:4px}.VPDoc:has(.realm-overview) .gateway-character{height:140px;width:110px;margin:-20px -8px -20px 0}}
+
+/* 404 */
+.not-found{max-width:640px;margin:0 auto;padding:88px 24px 120px;text-align:center}
+.nf-code{margin:0;font:600 92px/1 Georgia,serif;color:var(--vp-c-brand-1);opacity:.22;letter-spacing:6px}
+.nf-title{margin:10px 0 16px;font:600 34px/1.3 "Songti SC","SimSun",serif;color:var(--vp-c-text-1);letter-spacing:5px}
+.nf-text{margin:0;color:var(--vp-c-text-2);font-size:14px;line-height:2}
+.nf-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:30px 0 34px}
+.nf-primary{padding:10px 22px;border-radius:6px;background:var(--vp-c-brand-1);color:#08251d;font-size:14px;font-weight:600}
+.nf-ghost{padding:10px 22px;border-radius:6px;border:1px solid var(--vp-c-divider);color:var(--vp-c-text-1);font-size:14px}
+.nf-realms{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.nf-realms a{padding:6px 14px;border:1px solid var(--vp-c-divider);border-radius:999px;font-size:13px;color:var(--vp-c-text-2);transition:.2s}
+.nf-realms a:hover{border-color:var(--vp-c-brand-1);color:var(--vp-c-brand-1)}
+
+.NotFound .code{display:none}

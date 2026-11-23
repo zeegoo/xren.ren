@@ -30,6 +30,34 @@ function buildSidebar() {
 export default withMermaid(defineConfig({
   title: '码农修仙传',
   description: '用修仙体系讲计算机技术成长路径',
+  lang: 'zh-CN',
+  cleanUrls: true,
+  sitemap: { hostname: 'https://www.xren.ren' },
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+    ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }],
+    ['meta', { name: 'theme-color', content: '#0f2b25' }],
+    ['meta', { property: 'og:site_name', content: '码农修仙传' }],
+  ],
+  transformHead({ pageData }) {
+    const site = 'https://www.xren.ren'
+    const path = '/' + pageData.relativePath.replace(/(index)?\.md$/, '').replace(/\/$/, '')
+    const url = path === '/' ? site + '/' : site + path
+    const title = pageData.frontmatter.title || pageData.title || '码农修仙传'
+    const desc = pageData.frontmatter.description || pageData.description || '用修仙体系讲计算机技术成长路径'
+    return [
+      ['link', { rel: 'canonical', href: url }],
+      ['meta', { property: 'og:type', content: path === '/' ? 'website' : 'article' }],
+      ['meta', { property: 'og:title', content: title }],
+      ['meta', { property: 'og:description', content: desc }],
+      ['meta', { property: 'og:url', content: url }],
+      ['meta', { property: 'og:image', content: site + '/og-cover.png' }],
+      ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+      ['meta', { name: 'twitter:title', content: title }],
+      ['meta', { name: 'twitter:description', content: desc }],
+      ['meta', { name: 'twitter:image', content: site + '/og-cover.png' }],
+    ]
+  },
   themeConfig: {
     siteTitle: '码农修仙传',
     logo: '/logo.svg',
