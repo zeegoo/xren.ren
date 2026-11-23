@@ -7,12 +7,12 @@ import { fileURLToPath } from 'node:url'
 const docsRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 
 const sections = [
-  ['lianqi', '炼气期'],
-  ['zhuji', '筑基期'],
-  ['jindan', '金丹期'],
-  ['yuanying', '元婴期'],
-  ['huashen', '化神期'],
-  ['dujie', '渡劫 / 大乘'],
+  ['lianqi', '炼气期', 1, 30],
+  ['zhuji', '筑基期', 31, 60],
+  ['jindan', '金丹期', 61, 90],
+  ['yuanying', '元婴期', 91, 120],
+  ['huashen', '化神期', 121, 150],
+  ['dujie', '渡劫 / 大乘', 151, 180],
 ]
 
 function readTitle(file) {
@@ -24,11 +24,11 @@ function readTitle(file) {
 
 function buildSidebar() {
   const out = {}
-  for (const [dir, label] of sections) {
+  for (const [dir, label, lo, hi] of sections) {
     const full = path.join(docsRoot, dir)
     if (!fs.existsSync(full)) continue
     const items = fs.readdirSync(full)
-      .filter((f) => f.endsWith('.md'))
+      .filter((f) => { const n = parseInt((f.match(/^(\d+)/) || [0])[0], 10); return f.endsWith('.md') && n >= lo && n <= hi })
       .map((f) => ({ f, n: parseInt((f.match(/^(\d+)/) || [0, '9999'])[1], 10) }))
       .sort((a, b) => a.n - b.n || a.f.localeCompare(b.f))
       .map(({ f }) => ({ text: readTitle(path.join(full, f)), link: '/' + dir + '/' + f.replace(/\.md$/, '') }))
