@@ -1,0 +1,908 @@
+[
+  {
+    "dir": "lianqi",
+    "label": "炼气期",
+    "sections": [
+      {
+        "title": "入门认知",
+        "items": [
+          {
+            "text": "001 · 炼气期码农长什么样",
+            "link": "/lianqi/01-what-is-lianqi"
+          },
+          {
+            "text": "002 · 你处于哪个阶段",
+            "link": "/lianqi/02-which-stage"
+          },
+          {
+            "text": "003 · 为什么有人三个月筑基",
+            "link": "/lianqi/03-fast-breakthrough"
+          },
+          {
+            "text": "004 · 你的第一个程序：Hello World到点灯有多远",
+            "link": "/lianqi/04-first-program"
+          },
+          {
+            "text": "005 · 学编程到底在学什么",
+            "link": "/lianqi/05-what-to-learn"
+          },
+          {
+            "text": "006 · 从点灯到工程师：炼气期毕业标准",
+            "link": "/lianqi/06-lianqi-graduation"
+          }
+        ]
+      },
+      {
+        "title": "C 语言基础",
+        "items": [
+          {
+            "text": "007 · C语言：嵌入式工程师的母语",
+            "link": "/lianqi/07-c-language-overview"
+          },
+          {
+            "text": "008 · 变量在内存里怎么存：int/char/结构体的内存布局",
+            "link": "/lianqi/08-variable-memory"
+          },
+          {
+            "text": "009 · 二进制和十六进制：计算机的唯一语言",
+            "link": "/lianqi/09-binary-hex"
+          },
+          {
+            "text": "010 · 指针到底指什么：地址和解引用",
+            "link": "/lianqi/10-pointer-essence"
+          },
+          {
+            "text": "011 · 指针进阶：函数指针、指针数组和回调机制",
+            "link": "/lianqi/11-pointer-advanced"
+          },
+          {
+            "text": "012 · 结构体：把数据打包在一起",
+            "link": "/lianqi/12-struct"
+          }
+        ]
+      },
+      {
+        "title": "程序如何运行",
+        "items": [
+          {
+            "text": "013 · 内存对齐：为什么sizeof不准",
+            "link": "/lianqi/13-memory-alignment"
+          },
+          {
+            "text": "014 · 宏定义和条件编译：编译前的文本替换",
+            "link": "/lianqi/14-macro-conditional-compile"
+          },
+          {
+            "text": "015 · 位域和枚举：操控bit位和给常量起名字",
+            "link": "/lianqi/15-bitfield-enum"
+          },
+          {
+            "text": "016 · C语言常见陷阱：未初始化、野指针和缓冲区溢出",
+            "link": "/lianqi/16-c-pitfalls"
+          },
+          {
+            "text": "017 · printf的坑：格式化字符串和整数溢出",
+            "link": "/lianqi/17-printf-pitfalls"
+          },
+          {
+            "text": "018 · 函数调用栈：从main到子函数发生了什么",
+            "link": "/lianqi/18-call-stack"
+          }
+        ]
+      },
+      {
+        "title": "调试与实践",
+        "items": [
+          {
+            "text": "019 · 你的代码怎么变成可执行文件",
+            "link": "/lianqi/19-code-to-executable"
+          },
+          {
+            "text": "020 · 变量的生命周期：栈变量、全局变量和static",
+            "link": "/lianqi/20-variable-lifetime"
+          },
+          {
+            "text": "021 · 头文件到底在干什么",
+            "link": "/lianqi/21-header-files"
+          },
+          {
+            "text": "022 · 第一个Bug：程序为什么不跑",
+            "link": "/lianqi/22-first-bug-debugging"
+          },
+          {
+            "text": "023 · 数组越界：C语言最危险的Bug",
+            "link": "/lianqi/23-array-out-of-bounds"
+          },
+          {
+            "text": "024 · 程序崩了怎么看：段错误入门",
+            "link": "/lianqi/24-segfault-debugging"
+          }
+        ]
+      },
+      {
+        "title": "外设与毕业项目",
+        "items": [
+          {
+            "text": "025 · STM32开发环境搭建：Keil vs VS Code怎么选",
+            "link": "/lianqi/25-stm32-dev-environment"
+          },
+          {
+            "text": "026 · 点亮第一个LED：GPIO输出模式与HAL库点灯",
+            "link": "/lianqi/26-first-led-gpio"
+          },
+          {
+            "text": "027 · 串口输出Hello World：UART通信入门与printf重定向",
+            "link": "/lianqi/27-uart-hello-world"
+          },
+          {
+            "text": "028 · 按键输入：中断和轮询，STM32怎么响应你的手指",
+            "link": "/lianqi/28-button-input-interrupt-polling"
+          },
+          {
+            "text": "029 · 定时器闪烁LED：精确延时，STM32硬件计时器入门",
+            "link": "/lianqi/29-timer-led-blink"
+          },
+          {
+            "text": "030 · 炼气期毕业项目：做一个温度显示器，把前29篇串起来",
+            "link": "/lianqi/30-temperature-monitor"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "dir": "zhuji",
+    "label": "筑基期",
+    "sections": [
+      {
+        "title": "基础与学习路径",
+        "items": [
+          {
+            "text": "031 · 你已经筑基了吗——码农修炼体系四座地基",
+            "link": "/zhuji/031-are-you-zhuji"
+          },
+          {
+            "text": "032 · 你的代码在CPU里跑了一圈",
+            "link": "/zhuji/032-code-to-cpu"
+          },
+          {
+            "text": "033 · 为什么有人三年还在炼气——程序员成长停滞的根因和破局",
+            "link": "/zhuji/033-three-years-still-lianqi"
+          },
+          {
+            "text": "034 · 程序员绕不开的四座地基：CS基础体系总览",
+            "link": "/zhuji/034-four-foundations"
+          },
+          {
+            "text": "035 · 工作五年还在炼气期？筑基的四座地基你缺哪一块",
+            "link": "/zhuji/035-five-years-still-lianqi"
+          },
+          {
+            "text": "036 · 筑基毕业：能独立做一个项目",
+            "link": "/zhuji/036-zhuji-graduation"
+          }
+        ]
+      },
+      {
+        "title": "数据结构与算法",
+        "items": [
+          {
+            "text": "037 · 数据结构就是功法",
+            "link": "/zhuji/037-data-structure"
+          },
+          {
+            "text": "038 · 数组vs链表：90%的人选错了",
+            "link": "/zhuji/038-array-vs-linkedlist"
+          },
+          {
+            "text": "039 · 栈和队列：先入先出还是后入先出",
+            "link": "/zhuji/039-stack-queue"
+          },
+          {
+            "text": "040 · 哈希表：用空间换时间",
+            "link": "/zhuji/040-hash-table"
+          },
+          {
+            "text": "041 · 二叉树和红黑树：为什么Linux内核偏爱它",
+            "link": "/zhuji/041-tree-red-black"
+          },
+          {
+            "text": "042 · 图：社交网络和导航最短路径背后的数据结构",
+            "link": "/zhuji/042-graph-bfs-dfs-dijkstra"
+          }
+        ]
+      },
+      {
+        "title": "计算机组成",
+        "items": [
+          {
+            "text": "043 · 算法复杂度：O(n)到底在说什么",
+            "link": "/zhuji/043-algorithm-complexity"
+          },
+          {
+            "text": "044 · 排序算法：十个排序你该会几个",
+            "link": "/zhuji/044-sorting-algorithms"
+          },
+          {
+            "text": "045 · int a=1+2在CPU里跑了几步",
+            "link": "/zhuji/045-int-a-1-plus-2-cpu-steps"
+          },
+          {
+            "text": "046 · CPU是怎么工作的：取指解码执行",
+            "link": "/zhuji/046-cpu-how-it-works"
+          },
+          {
+            "text": "047 · 内存Hierarchy：寄存器到硬盘的速度差",
+            "link": "/zhuji/047-memory-hierarchy"
+          },
+          {
+            "text": "048 · 位运算：嵌入式工程师的基本功",
+            "link": "/zhuji/048-bit-operations"
+          }
+        ]
+      },
+      {
+        "title": "系统与网络",
+        "items": [
+          {
+            "text": "049 · 浮点数怎么存的：IEEE 754标准",
+            "link": "/zhuji/049-floating-point-ieee754"
+          },
+          {
+            "text": "050 · 从逻辑门到CPU：概念总览",
+            "link": "/zhuji/050-logic-gates-to-cpu"
+          },
+          {
+            "text": "051 · 操作系统是天道规则",
+            "link": "/zhuji/051-os-tiandao"
+          },
+          {
+            "text": "052 · 进程vs线程：一个汉堡和十个人吃",
+            "link": "/zhuji/052-process-vs-thread"
+          },
+          {
+            "text": "053 · 网络是传送阵",
+            "link": "/zhuji/053-network"
+          },
+          {
+            "text": "054 · HTTP和DNS：浏览器到服务器的对话",
+            "link": "/zhuji/054-http-dns"
+          }
+        ]
+      },
+      {
+        "title": "工程工具",
+        "items": [
+          {
+            "text": "055 · TCP vs UDP：可靠和快速的取舍",
+            "link": "/zhuji/055-tcp-vs-udp"
+          },
+          {
+            "text": "056 · 数据库是藏经阁：SQL增删改查到B+树索引",
+            "link": "/zhuji/056-database-b-tree"
+          },
+          {
+            "text": "057 · Git代码时光机：版本控制入门到分支管理",
+            "link": "/zhuji/057-git-version-control"
+          },
+          {
+            "text": "058 · Git协作工作流：冲突解决和PR流程",
+            "link": "/zhuji/058-git-collaboration-workflow"
+          },
+          {
+            "text": "059 · Linux命令行入门：工程师的操作系统",
+            "link": "/zhuji/059-linux-command-line"
+          },
+          {
+            "text": "060 · Shell脚本入门：自动化你的重复劳动",
+            "link": "/zhuji/060-shell-script"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "dir": "jindan",
+    "label": "金丹期",
+    "sections": [
+      {
+        "title": "编译与链接",
+        "items": [
+          {
+            "text": "061 · 编译器对你代码做了什么",
+            "link": "/jindan/061-compiler"
+          },
+          {
+            "text": "062 · 预处理：#include和#define的真相",
+            "link": "/jindan/62-preprocessor"
+          },
+          {
+            "text": "063 · 编译：C代码怎么变成汇编",
+            "link": "/jindan/63-compile"
+          },
+          {
+            "text": "064 · undefined reference：链接器原理",
+            "link": "/jindan/64-linker"
+          },
+          {
+            "text": "065 · ELF文件解剖：一个可执行文件里有什么",
+            "link": "/jindan/65-elf"
+          },
+          {
+            "text": "066 · 为什么你的代码编译过了但链接报错",
+            "link": "/jindan/66-link-errors"
+          }
+        ]
+      },
+      {
+        "title": "内核与资源",
+        "items": [
+          {
+            "text": "067 · 操作系统内核是天道规则",
+            "link": "/jindan/67-os-kernel"
+          },
+          {
+            "text": "068 · 用户态和内核态：CPU的特权级",
+            "link": "/jindan/68-user-kernel-mode"
+          },
+          {
+            "text": "069 · 谁在决定CPU归谁：进程调度CFS",
+            "link": "/jindan/69-cfs-scheduler"
+          },
+          {
+            "text": "070 · 虚拟内存：每个进程都以为自己独占4GB",
+            "link": "/jindan/70-virtual-memory"
+          },
+          {
+            "text": "071 · 进程间通信：管道、共享内存、信号",
+            "link": "/jindan/71-ipc"
+          },
+          {
+            "text": "072 · 文件系统：数据怎么存到硬盘上的",
+            "link": "/jindan/72-filesystem"
+          }
+        ]
+      },
+      {
+        "title": "并发与性能",
+        "items": [
+          {
+            "text": "073 · 线程安全：锁、原子操作与内存屏障",
+            "link": "/jindan/73-thread-safety"
+          },
+          {
+            "text": "074 · 软中断、Tasklet和Workqueue：中断下半部的三种机制",
+            "link": "/jindan/74-softirq"
+          },
+          {
+            "text": "075 · I/O 多路复用：select、poll 和 epoll",
+            "link": "/jindan/75-epoll"
+          },
+          {
+            "text": "076 · CPU缓存三层塔",
+            "link": "/jindan/076-cache-tower"
+          },
+          {
+            "text": "077 · 锁的家族：自旋锁、互斥锁、读写锁、顺序锁、RCU",
+            "link": "/jindan/77-lock-family"
+          },
+          {
+            "text": "078 · 死锁：四个条件和怎么破解",
+            "link": "/jindan/78-deadlock"
+          }
+        ]
+      },
+      {
+        "title": "系统编程",
+        "items": [
+          {
+            "text": "079 · 无锁编程：CAS和原子操作",
+            "link": "/jindan/79-lockfree"
+          },
+          {
+            "text": "080 · 为什么金丹期看代码像开天眼",
+            "link": "/jindan/080-tianyan"
+          },
+          {
+            "text": "081 · 性能分析：你的程序慢在哪",
+            "link": "/jindan/81-perf"
+          },
+          {
+            "text": "082 · 内存泄漏怎么查：valgrind和ASan",
+            "link": "/jindan/82-valgrind"
+          },
+          {
+            "text": "083 · 多线程编程实战：生产者消费者",
+            "link": "/jindan/83-producer-consumer"
+          },
+          {
+            "text": "084 · 网络编程：socket入门",
+            "link": "/jindan/84-socket"
+          }
+        ]
+      },
+      {
+        "title": "构建与毕业",
+        "items": [
+          {
+            "text": "085 · 进程间通信：管道、消息队列、共享内存 API 实战",
+            "link": "/jindan/85-ipc-advanced"
+          },
+          {
+            "text": "086 · 信号：进程间的紧急信号",
+            "link": "/jindan/86-signal"
+          },
+          {
+            "text": "087 · 静态库和动态库：编译、链接和加载",
+            "link": "/jindan/87-library"
+          },
+          {
+            "text": "088 · Makefile从入门到放弃：手动编译自动化之路",
+            "link": "/jindan/88-makefile"
+          },
+          {
+            "text": "089 · sed/awk文本三剑客：日志分析和批量处理",
+            "link": "/jindan/89-sed-awk"
+          },
+          {
+            "text": "090 · 金丹期毕业：能读懂任何系统级代码",
+            "link": "/jindan/90-graduation"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "dir": "yuanying",
+    "label": "元婴期",
+    "sections": [
+      {
+        "title": "指令与硬件",
+        "items": [
+          {
+            "text": "091 · CPU指令集是天地法则",
+            "link": "/yuanying/091-instruction-set"
+          },
+          {
+            "text": "092 · 从C代码到晶体管翻转",
+            "link": "/yuanying/092-c-to-transistor"
+          },
+          {
+            "text": "093 · 为什么嵌入式工程师天生在元婴期",
+            "link": "/yuanying/093-embedded-yuanying"
+          },
+          {
+            "text": "094 · ARM vs RISC-V大战",
+            "link": "/yuanying/094-arm-vs-riscv"
+          },
+          {
+            "text": "095 · Datasheet怎么读：嵌入式工程师的必修课",
+            "link": "/yuanying/095-datasheet"
+          },
+          {
+            "text": "096 · 0和1背后的数学：布尔代数和数字电路基础",
+            "link": "/yuanying/096-boolean-algebra"
+          }
+        ]
+      },
+      {
+        "title": "启动与外设",
+        "items": [
+          {
+            "text": "097 · 元婴期修炼路径：从点灯到写固件",
+            "link": "/yuanying/097-cultivation-path"
+          },
+          {
+            "text": "098 · 驱动开发：沟通硬件的御灵术",
+            "link": "/yuanying/098-driver-dev"
+          },
+          {
+            "text": "099 · 固件：开天辟地前最后一道工序",
+            "link": "/yuanying/099-firmware"
+          },
+          {
+            "text": "100 · STM32启动流程：从上电到main()经历了什么",
+            "link": "/yuanying/100-startup"
+          },
+          {
+            "text": "101 · 时钟树是修炼灵脉：RCC与PLL全链路",
+            "link": "/yuanying/101-rcc-clock"
+          },
+          {
+            "text": "102 · 中断与NVIC：抢占、嵌套、临界区",
+            "link": "/yuanying/102-nvic"
+          }
+        ]
+      },
+      {
+        "title": "总线与采集",
+        "items": [
+          {
+            "text": "103 · GPIO深度：复用、上下拉、翻转速度",
+            "link": "/yuanying/103-gpio"
+          },
+          {
+            "text": "104 · UART实战：丢字节查了三天",
+            "link": "/yuanying/104-uart"
+          },
+          {
+            "text": "105 · SPI总线：主从模式、时钟极性、DMA传输",
+            "link": "/yuanying/105-spi"
+          },
+          {
+            "text": "106 · I2C总线：地址冲突、Clock Stretching、总线死锁怎么破",
+            "link": "/yuanying/106-i2c"
+          },
+          {
+            "text": "107 · ADC采样：DMA双缓冲流水线",
+            "link": "/yuanying/107-adc"
+          },
+          {
+            "text": "108 · 定时器详解：PWM、输入捕获、编码器接口",
+            "link": "/yuanying/108-timer"
+          }
+        ]
+      },
+      {
+        "title": "可靠性与通信",
+        "items": [
+          {
+            "text": "109 · 看门狗和 Flash 保护：IWDG/WWDG 与 RDP",
+            "link": "/yuanying/109-watchdog-flash"
+          },
+          {
+            "text": "110 · DMA深度：通道仲裁、环形缓冲区、Cache一致性",
+            "link": "/yuanying/110-dma"
+          },
+          {
+            "text": "111 · 低功耗设计：Stop/Standby模式与唤醒源",
+            "link": "/yuanying/111-lowpower"
+          },
+          {
+            "text": "112 · Bootloader设计：IAP升级与双Bank切换",
+            "link": "/yuanying/112-bootloader"
+          },
+          {
+            "text": "113 · CAN总线：车规嵌入式通信",
+            "link": "/yuanying/113-can"
+          },
+          {
+            "text": "114 · SD卡和FatFS文件系统：数据持久化",
+            "link": "/yuanying/114-sd-fatfs"
+          }
+        ]
+      },
+      {
+        "title": "RTOS 与调试",
+        "items": [
+          {
+            "text": "115 · 以太网和LWIP：嵌入式联网",
+            "link": "/yuanying/115-ethernet"
+          },
+          {
+            "text": "116 · RTOS入门：FreeRTOS第一课",
+            "link": "/yuanying/116-rtos"
+          },
+          {
+            "text": "117 · RTOS任务通信：队列、信号量、通知",
+            "link": "/yuanying/117-rtos-ipc"
+          },
+          {
+            "text": "118 · 调试器原理：JTAG/SWD怎么看见你的代码",
+            "link": "/yuanying/118-debugger"
+          },
+          {
+            "text": "119 · 示波器入门：嵌入式工程师的第三只眼",
+            "link": "/yuanying/119-oscilloscope"
+          },
+          {
+            "text": "120 · 元婴期毕业：能独立设计嵌入式产品",
+            "link": "/yuanying/120-graduation"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "dir": "huashen",
+    "label": "化神期",
+    "sections": [
+      {
+        "title": "从使用到创造",
+        "items": [
+          {
+            "text": "121 · 创造编程语言需要什么",
+            "link": "/huashen/121-create-language"
+          },
+          {
+            "text": "122 · Linus为什么是化神大能",
+            "link": "/huashen/122-linus"
+          },
+          {
+            "text": "123 · 化神期是什么：从用工具到造工具",
+            "link": "/huashen/123-what-is-huashen"
+          },
+          {
+            "text": "124 · 框架设计的道与术",
+            "link": "/huashen/124-framework-design"
+          },
+          {
+            "text": "125 · 从写代码到造语言",
+            "link": "/huashen/125-code-to-language"
+          },
+          {
+            "text": "126 · 操作系统是怎么炼成的",
+            "link": "/huashen/126-build-os"
+          }
+        ]
+      },
+      {
+        "title": "编译器实现",
+        "items": [
+          {
+            "text": "127 · 编译器是怎么造出来的：总览",
+            "link": "/huashen/127-compiler-overview"
+          },
+          {
+            "text": "128 · 词法分析器：把代码切成token",
+            "link": "/huashen/128-lexer"
+          },
+          {
+            "text": "129 · 语法分析器：递归下降和LR",
+            "link": "/huashen/129-parser"
+          },
+          {
+            "text": "130 · 语义分析：类型检查和作用域",
+            "link": "/huashen/130-semantic-analysis"
+          },
+          {
+            "text": "131 · 代码生成：从AST到汇编",
+            "link": "/huashen/131-code-generation"
+          },
+          {
+            "text": "132 · 编译优化：让生成的代码跑得更快",
+            "link": "/huashen/132-compiler-optimization"
+          }
+        ]
+      },
+      {
+        "title": "数据库引擎",
+        "items": [
+          {
+            "text": "133 · 数据库引擎从零开始有多难",
+            "link": "/huashen/133-database-engine-from-scratch"
+          },
+          {
+            "text": "134 · B+树：数据库索引怎么选",
+            "link": "/huashen/134-bplus-tree"
+          },
+          {
+            "text": "135 · 事务和隔离级别：ACID不是口号",
+            "link": "/huashen/135-transaction-isolation"
+          },
+          {
+            "text": "136 · WAL日志：数据库崩溃恢复的原理",
+            "link": "/huashen/136-wal-crash-recovery"
+          },
+          {
+            "text": "137 · 手写一个迷你操作系统（一）：Bootloader和启动",
+            "link": "/huashen/137-mini-os-bootloader"
+          },
+          {
+            "text": "138 · 手写一个迷你操作系统（二）：内存管理和Buddy Allocator",
+            "link": "/huashen/138-mini-os-memory"
+          }
+        ]
+      },
+      {
+        "title": "系统与分布式",
+        "items": [
+          {
+            "text": "139 · 手写一个迷你操作系统（三）：进程调度",
+            "link": "/huashen/139-mini-os-scheduler"
+          },
+          {
+            "text": "140 · 手写一个迷你操作系统（四）：Shell和系统调用",
+            "link": "/huashen/140-mini-os-shell-syscall"
+          },
+          {
+            "text": "141 · 开源社区怎么混：PR、Review、维护者",
+            "link": "/huashen/141-open-source-community"
+          },
+          {
+            "text": "142 · 读源码的正确姿势：怎么切入大项目",
+            "link": "/huashen/142-reading-source-code"
+          },
+          {
+            "text": "143 · 分布式CAP定理和Raft共识算法",
+            "link": "/huashen/143-cap-raft"
+          },
+          {
+            "text": "144 · JIT编译器原理：为什么JVM能越跑越快",
+            "link": "/huashen/144-jit-compiler"
+          }
+        ]
+      },
+      {
+        "title": "架构决策",
+        "items": [
+          {
+            "text": "145 · LLVM Pass开发：给编译器写插件",
+            "link": "/huashen/145-llvm-pass"
+          },
+          {
+            "text": "146 · 技术选型的真相：为什么大厂选A不选B",
+            "link": "/huashen/146-tech-selection"
+          },
+          {
+            "text": "147 · 架构模式：分层、事件驱动、微服务",
+            "link": "/huashen/147-architecture-patterns"
+          },
+          {
+            "text": "148 · 技术债务：代码为什么会烂",
+            "link": "/huashen/148-technical-debt"
+          },
+          {
+            "text": "149 · Code Review：不只是找Bug",
+            "link": "/huashen/149-code-review"
+          },
+          {
+            "text": "150 · 化神期毕业：能设计一个完整系统",
+            "link": "/huashen/150-huashen-graduation"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "dir": "dujie",
+    "label": "渡劫期",
+    "sections": [
+      {
+        "title": "计算理论",
+        "items": [
+          {
+            "text": "151 · 冯诺依曼架构：八十年来所有计算机的共同祖先",
+            "link": "/dujie/151-von-neumann-architecture"
+          },
+          {
+            "text": "152 · 图灵机",
+            "link": "/dujie/152-turing-machine"
+          },
+          {
+            "text": "153 · 信息论：一比特有多大",
+            "link": "/dujie/153-information-theory"
+          },
+          {
+            "text": "154 · 计算机科学的终极之问",
+            "link": "/dujie/154-p-vs-np"
+          },
+          {
+            "text": "155 · 计算机架构演进史：算盘到量子计算八十年",
+            "link": "/dujie/155-computing-architecture-evolution"
+          },
+          {
+            "text": "156 · 摩尔定律的终结：芯片工艺的天花板在哪",
+            "link": "/dujie/156-moores-law-end"
+          }
+        ]
+      },
+      {
+        "title": "产业与职业",
+        "items": [
+          {
+            "text": "157 · 修炼体系全景图",
+            "link": "/dujie/157-cultivation-full-map"
+          },
+          {
+            "text": "158 · 码农修仙者的归宿",
+            "link": "/dujie/158-coder-destiny"
+          },
+          {
+            "text": "159 · 嵌入式工程师35岁危机是真的吗",
+            "link": "/dujie/159-embedded-35-crisis"
+          },
+          {
+            "text": "160 · 中国芯片突围：从设计到制造的全产业链",
+            "link": "/dujie/160-china-chip-breakthrough"
+          },
+          {
+            "text": "161 · RISC-V的机会和挑战：国产芯片的新路径",
+            "link": "/dujie/161-riscv-china-chip-path"
+          },
+          {
+            "text": "162 · 嵌入式行业的未来：万物互联到具身智能",
+            "link": "/dujie/162-embedded-future-iot-embodied-ai"
+          }
+        ]
+      },
+      {
+        "title": "人工智能",
+        "items": [
+          {
+            "text": "163 · 大厂vs创业公司vs外企：技术人怎么选",
+            "link": "/dujie/163-bigtech-vs-startup-vs-foreign"
+          },
+          {
+            "text": "164 · 技术人怎么赚钱：副业创业投资的变现路径",
+            "link": "/dujie/164-tech-money-side-business-startup-investment"
+          },
+          {
+            "text": "165 · AI会不会取代程序员：大模型能力边界和不可替代的工作",
+            "link": "/dujie/165-ai-replace-programmers"
+          },
+          {
+            "text": "166 · 大模型原理：Transformer到底在做什么",
+            "link": "/dujie/166-transformer-llm-principle"
+          },
+          {
+            "text": "167 · AI推理上MCU：TFLite Micro怎么跑",
+            "link": "/dujie/167-tflite-micro-mcu"
+          },
+          {
+            "text": "168 · AI和嵌入式：算力芯片的战争",
+            "link": "/dujie/168-ai-embedded-chip-war"
+          }
+        ]
+      },
+      {
+        "title": "技术前沿",
+        "items": [
+          {
+            "text": "169 · Rust重写万物：系统编程的新趋势",
+            "link": "/dujie/169-rust-rewrite-everything"
+          },
+          {
+            "text": "170 · 量子计算：下一个计算革命",
+            "link": "/dujie/170-quantum-computing"
+          },
+          {
+            "text": "171 · 脑机接口：碳基和硅基的融合",
+            "link": "/dujie/171-brain-computer-interface"
+          },
+          {
+            "text": "172 · AGI：通用人工智能还有多远",
+            "link": "/dujie/172-agi-how-far"
+          },
+          {
+            "text": "173 · 技术转管理：什么时候转，怎么转",
+            "link": "/dujie/173-tech-to-management"
+          },
+          {
+            "text": "174 · 技术领导力：怎么带团队和做架构决策",
+            "link": "/dujie/174-tech-leadership"
+          }
+        ]
+      },
+      {
+        "title": "终身成长",
+        "items": [
+          {
+            "text": "175 · 修炼永恒：终身学习不是口号是生存方式",
+            "link": "/dujie/175-lifelong-learning"
+          },
+          {
+            "text": "176 · 技术人的知识管理：笔记系统和知识库怎么搭",
+            "link": "/dujie/176-knowledge-management"
+          },
+          {
+            "text": "177 · 读源码vs写项目：程序员成长的两条路怎么选",
+            "link": "/dujie/177-read-source-vs-write-project"
+          },
+          {
+            "text": "178 · 技术社区和人脉：为什么不能闭门造车",
+            "link": "/dujie/178-tech-community-networking"
+          },
+          {
+            "text": "179 · 技术人的健康：颈椎和眼睛是第一生产力",
+            "link": "/dujie/179-health-cervical-eyes"
+          },
+          {
+            "text": "180 · 大道至简：回到炼气期重新出发",
+            "link": "/dujie/180-dao-to-simplicity"
+          }
+        ]
+      }
+    ]
+  }
+]

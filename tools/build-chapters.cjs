@@ -1,0 +1,21 @@
+const fs=require('fs');
+const dirs=['lianqi','zhuji','jindan','yuanying','huashen','dujie'],names=['炼气期','筑基期','金丹期','元婴期','化神期','渡劫期'];
+const labels=[['入门认知','C 语言基础','程序如何运行','调试与实践','外设与毕业项目'],['基础与学习路径','数据结构与算法','计算机组成','系统与网络','工程工具'],['编译与链接','内核与资源','并发与性能','系统编程','构建与毕业'],['指令与硬件','启动与外设','总线与采集','可靠性与通信','RTOS 与调试'],['从使用到创造','编译器实现','数据库引擎','系统与分布式','架构决策'],['计算理论','产业与职业','人工智能','技术前沿','终身成长']];
+const data=dirs.map((dir,i)=>{
+const lo=i*30+1;
+const articles=fs.readdirSync('docs/'+dir).filter(f=>/^\d+-.*\.md$/.test(f)).map(f=>({file:f,num:parseInt(f),title:(fs.readFileSync('docs/'+dir+'/'+f,'utf8').match(/^#\s+(.+)$/m)||[])[1]?.replace(/^【[^】]+】\s*/,'').trim()})).filter(a=>a.num>=lo&&a.num<lo+30).sort((a,b)=>a.num-b.num);
+const sections=labels[i].map((title,k)=>({title,items:articles.slice(k*6,k*6+6).map(a=>({text:String(a.num).padStart(3,'0')+' · '+a.title,link:'/'+dir+'/'+a.file.replace('.md','')}))}));
+let text='---\nsidebar: false\naside: false\ntitle: '+names[i]+' · 修炼目录\n---\n\n<div class="realm-overview">\n<a href="/">← 六大境界</a>\n\n# '+names[i]+' · 修炼目录\n\n30 篇文章 · 五组主题。先看全貌，再选一课。\n\n<div class="chapter-tabs">\n';
+dirs.forEach((d,j)=>text+='<a '+(i===j?'class="active"':'')+' href="/'+d+'/">'+names[j]+'</a>\n');
+text+='</div>\n';
+sections.forEach((s,k)=>{text+='\n<section class="course-group"><div class="course-group-title"><span>0'+(k+1)+'</span><h2>'+s.title+'</h2></div><div class="lesson-list">\n';s.items.forEach(a=>text+='<a href="'+a.link+'"><strong>'+a.text+'</strong><span>阅读 →</span></a>\n');text+='</div></section>\n'});
+fs.writeFileSync('docs/'+dir+'/index.md',text+'</div>\n');
+return {dir,label:names[i],sections};
+});
+fs.writeFileSync('docs/.vitepress/chapters.json',JSON.stringify(data,null,2));
+let home=fs.readFileSync('docs/index.md','utf8');
+dirs.forEach(d=>home=home.replace(new RegExp("href='/"+d+"/[^']+'","g"),"href='/"+d+"/'"));
+fs.writeFileSync('docs/index.md',home);
+let c=fs.readFileSync('docs/.vitepress/config.mts','utf8'),a=c.indexOf('function buildSidebar()'),b=c.indexOf('\nexport default',a);
+c=c.slice(0,a)+"function buildSidebar() {\n const chapters = JSON.parse(fs.readFileSync(path.join(docsRoot, '.vitepress/chapters.json'), 'utf8'))\n return Object.fromEntries(chapters.map(c => ['/' + c.dir + '/', [{text:c.label+' · 全部章节',link:'/'+c.dir+'/'}, ...c.sections.map(s=>({text:s.title,collapsed:false,items:s.items}))]]))\n}\n"+c.slice(b);
+fs.writeFileSync('docs/.vitepress/config.mts',c);

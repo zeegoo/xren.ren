@@ -23,18 +23,8 @@ function readTitle(file) {
 }
 
 function buildSidebar() {
-  const out = {}
-  for (const [dir, label, lo, hi] of sections) {
-    const full = path.join(docsRoot, dir)
-    if (!fs.existsSync(full)) continue
-    const items = fs.readdirSync(full)
-      .filter((f) => { const n = parseInt((f.match(/^(\d+)/) || [0])[0], 10); return f.endsWith('.md') && n >= lo && n <= hi })
-      .map((f) => ({ f, n: parseInt((f.match(/^(\d+)/) || [0, '9999'])[1], 10) }))
-      .sort((a, b) => a.n - b.n || a.f.localeCompare(b.f))
-      .map(({ f }) => ({ text: readTitle(path.join(full, f)), link: '/' + dir + '/' + f.replace(/\.md$/, '') }))
-    out['/' + dir + '/'] = [{ text: label, collapsible: true, items }]
-  }
-  return out
+ const chapters = JSON.parse(fs.readFileSync(path.join(docsRoot, '.vitepress/chapters.json'), 'utf8'))
+ return Object.fromEntries(chapters.map(c => ['/' + c.dir + '/', [{text:c.label+' · 全部章节',link:'/'+c.dir+'/'}, ...c.sections.map(s=>({text:s.title,collapsed:false,items:s.items}))]]))
 }
 
 export default withMermaid(defineConfig({

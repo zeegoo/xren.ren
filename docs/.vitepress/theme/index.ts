@@ -6,3 +6,4 @@ export default {
   extends: DefaultTheme,
   Layout: () => h(Layout)
 }
+import './academy.css'
