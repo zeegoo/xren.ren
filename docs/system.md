@@ -20,7 +20,7 @@
 
 突破条件：能讲清楚"一段代码从写完到运行，中间发生了什么"。
 
-[看筑基期内容 →](/zhuji/04-are-you-zhuji)
+[看筑基期内容 →](/zhuji/031-are-you-zhuji)
 
 ---
 
@@ -30,7 +30,7 @@
 
 突破条件：能从零解释一个技术方案的"为什么"，不只是"怎么做"。
 
-[看金丹期内容 →](/jindan/09-compiler)
+[看金丹期内容 →](/jindan/061-compiler)
 
 ---
 
@@ -42,7 +42,7 @@
 
 突破条件：能在软件和硬件之间自由切换思维，从一行代码追到晶体管翻转。
 
-[看元婴期内容 →](/yuanying/15-instruction-set)
+[看元婴期内容 →](/yuanying/091-instruction-set)
 
 ---
 
@@ -52,7 +52,7 @@
 
 Linus造了Linux和Git，Dennis Ritchie造了C语言和Unix。
 
-[看化神期内容 →](/huashen/21-create-language)
+[看化神期内容 →](/huashen/121-create-language)
 
 ---
 

@@ -57,18 +57,15 @@ npx vitepress build docs
 
 ## 侧边栏
 
-侧边栏写在 docs/.vitepress/config.mts，目前是手写的 131 条链接。新增文章必须同步加进去，否则只能靠搜索访问。
+侧边栏由构建时扫描 docs/<境界>/ 自动生成（config.mts 里的 buildSidebar），按编号排序，标题取每篇的一级标题。新增文章只要放进对应目录就会自动出现，不需要改配置。
 
-当前有 2 条死链，线上返回 404：
+## 旧编号跳转
 
-- /zhuji/035-which-foundation-missing → 实际文件是 035-five-years-still-lianqi.md
-- /zhuji/037-data-structures-overview → 实际文件是 037-data-structure.md
+老编号页面已移到 content/archive/legacy-site-duplicates/，站点侧由 docs/public/_redirects 做 301，共 29 条（26 组同题页、1 组同 slug、2 条历史死链）。
 
 ## 已知问题
 
-1. 26 组同题页面并存（52 个文件），老编号与新编号两套体系叠加，例如 jindan/09-compiler 与 jindan/061-compiler。
-2. 131 条导航只覆盖部分正文，约 80 篇没有侧边栏入口。
-3. 侧边栏 2 条死链，见上。
+暂无已知死链。构建时 VitePress 会检查站内链接，死链会直接让构建失败。
 
 ## 内容规范
 
